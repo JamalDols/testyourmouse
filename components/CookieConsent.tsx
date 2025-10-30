@@ -77,7 +77,7 @@ export function CookieConsent() {
 
     const script = document.createElement("script");
     script.async = true;
-    script.src = "https://www.googletagmanager.com/gtm.js?id=G-B62Y6EYXSP";
+    script.src = "https://www.googletagmanager.com/gtm.js?id=GTM-NLZTSHPB";
     document.head.appendChild(script);
   };
 
