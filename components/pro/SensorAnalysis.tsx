@@ -1,7 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
-import { Card } from '../ui/card';
-import { Badge } from '../ui/badge';
-import { Activity, Gauge, Zap, TrendingUp } from 'lucide-react';
+"use client";
+
+import { useState, useEffect, useRef } from "react";
+import { Card } from "../ui/card";
+import { Badge } from "../ui/badge";
+import { Activity, Gauge, Zap, TrendingUp } from "lucide-react";
 
 interface MouseData {
   timestamp: number;
@@ -30,7 +32,7 @@ export function SensorAnalysis() {
 
   const stopTracking = () => {
     setIsTracking(false);
-    
+
     if (mouseData.length > 0) {
       const avg = mouseData.reduce((sum, d) => sum + d.velocity, 0) / mouseData.length;
       setAvgVelocity(Math.round(avg));
@@ -42,7 +44,7 @@ export function SensorAnalysis() {
 
     const currentTime = Date.now();
     const timeDelta = currentTime - lastPositionRef.current.time;
-    
+
     if (timeDelta > 0) {
       const dx = e.clientX - lastPositionRef.current.x;
       const dy = e.clientY - lastPositionRef.current.y;
@@ -53,10 +55,10 @@ export function SensorAnalysis() {
         timestamp: currentTime,
         x: e.clientX,
         y: e.clientY,
-        velocity: velocity
+        velocity: velocity,
       };
 
-      setMouseData(prev => [...prev, newData].slice(-100)); // Keep last 100 points
+      setMouseData((prev) => [...prev, newData].slice(-100)); // Keep last 100 points
       setCurrentVelocity(Math.round(velocity));
 
       if (velocity > maxVelocity) {
@@ -67,7 +69,7 @@ export function SensorAnalysis() {
     lastPositionRef.current = {
       x: e.clientX,
       y: e.clientY,
-      time: currentTime
+      time: currentTime,
     };
   };
 
@@ -76,24 +78,20 @@ export function SensorAnalysis() {
     return Math.round(dpi * 1.1); // Approximate conversion
   };
 
-  const estimatedPollRate = mouseData.length > 10
-    ? Math.round(1000 / ((mouseData[mouseData.length - 1].timestamp - mouseData[0].timestamp) / mouseData.length))
-    : pollRate;
+  const estimatedPollRate = mouseData.length > 10 ? Math.round(1000 / ((mouseData[mouseData.length - 1].timestamp - mouseData[0].timestamp) / mouseData.length)) : pollRate;
 
   const getVelocityColor = (velocity: number) => {
-    if (velocity < 100) return 'text-green-400';
-    if (velocity < 500) return 'text-cyan-400';
-    if (velocity < 1000) return 'text-purple-400';
-    return 'text-red-400';
+    if (velocity < 100) return "text-green-400";
+    if (velocity < 500) return "text-cyan-400";
+    if (velocity < 1000) return "text-purple-400";
+    return "text-red-400";
   };
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       <div className="text-center mb-6">
         <h2 className="text-xl mb-2 text-cyan-400 tracking-wide">[SENSOR_ANALYSIS]</h2>
-        <p className="text-gray-400 font-mono text-sm">
-          // Advanced mouse sensor diagnostics
-        </p>
+        <p className="text-gray-400 font-mono text-sm">// Advanced mouse sensor diagnostics</p>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
@@ -112,11 +110,7 @@ export function SensorAnalysis() {
 
         <Card className="p-4 bg-[#12121a] border-purple-500/30">
           <label className="text-xs text-purple-400/70 mb-2 block tracking-wider">POLL_RATE_HZ</label>
-          <select
-            value={pollRate}
-            onChange={(e) => setPollRate(Number(e.target.value))}
-            className="w-full px-3 py-2 bg-purple-500/5 border border-purple-500/30 rounded text-purple-400 font-mono"
-          >
+          <select value={pollRate} onChange={(e) => setPollRate(Number(e.target.value))} className="w-full px-3 py-2 bg-purple-500/5 border border-purple-500/30 rounded text-purple-400 font-mono">
             <option value="125">125 Hz</option>
             <option value="250">250 Hz</option>
             <option value="500">500 Hz</option>
@@ -128,16 +122,19 @@ export function SensorAnalysis() {
         </Card>
       </div>
 
-      <div 
+      <div
         ref={trackingAreaRef}
         className="relative h-96 overflow-hidden bg-[#0a0a0f] border-2 border-cyan-500/30 hover:border-cyan-500/50 transition-colors cursor-crosshair rounded-lg"
         onMouseMove={handleMouseMove}
       >
         {/* Grid pattern */}
-        <div className="absolute inset-0 opacity-10" style={{
-          backgroundImage: 'linear-gradient(rgba(0, 217, 255, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 217, 255, 0.2) 1px, transparent 1px)',
-          backgroundSize: '50px 50px'
-        }} />
+        <div
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage: "linear-gradient(rgba(0, 217, 255, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 217, 255, 0.2) 1px, transparent 1px)",
+            backgroundSize: "50px 50px",
+          }}
+        />
 
         <div className="absolute inset-0 flex items-center justify-center">
           {!isTracking ? (
@@ -154,14 +151,9 @@ export function SensorAnalysis() {
           ) : (
             <div className="text-center">
               <Gauge className={`w-24 h-24 mx-auto mb-4 animate-pulse ${getVelocityColor(currentVelocity)}`} />
-              <p className={`text-6xl font-mono mb-2 ${getVelocityColor(currentVelocity)}`}>
-                {currentVelocity}
-              </p>
+              <p className={`text-6xl font-mono mb-2 ${getVelocityColor(currentVelocity)}`}>{currentVelocity}</p>
               <p className="text-sm text-gray-500 font-mono mb-4">px/s</p>
-              <button
-                onClick={stopTracking}
-                className="px-6 py-3 bg-red-500/20 hover:bg-red-500/30 border border-red-500/50 text-red-400 rounded-lg transition-all font-mono tracking-wider"
-              >
+              <button onClick={stopTracking} className="px-6 py-3 bg-red-500/20 hover:bg-red-500/30 border border-red-500/50 text-red-400 rounded-lg transition-all font-mono tracking-wider">
                 [STOP_TRACKING]
               </button>
             </div>
@@ -175,17 +167,7 @@ export function SensorAnalysis() {
               if (i === 0) return null;
               const prevPoint = arr[i - 1];
               const opacity = i / arr.length;
-              return (
-                <line
-                  key={i}
-                  x1={prevPoint.x}
-                  y1={prevPoint.y}
-                  x2={point.x}
-                  y2={point.y}
-                  stroke={`rgba(0, 217, 255, ${opacity * 0.5})`}
-                  strokeWidth="2"
-                />
-              );
+              return <line key={i} x1={prevPoint.x} y1={prevPoint.y} x2={point.x} y2={point.y} stroke={`rgba(0, 217, 255, ${opacity * 0.5})`} strokeWidth="2" />;
             })}
           </svg>
         )}
@@ -257,29 +239,19 @@ export function SensorAnalysis() {
             <div>
               <div className="flex justify-between text-xs mb-1">
                 <span className="text-gray-400 font-mono">Response</span>
-                <span className="text-green-400 font-mono">
-                  {pollRate >= 1000 ? 'EXCELLENT' : pollRate >= 500 ? 'GOOD' : 'AVERAGE'}
-                </span>
+                <span className="text-green-400 font-mono">{pollRate >= 1000 ? "EXCELLENT" : pollRate >= 500 ? "GOOD" : "AVERAGE"}</span>
               </div>
               <div className="h-2 bg-green-500/20 rounded-full overflow-hidden border border-green-500/30">
-                <div 
-                  className="h-full bg-green-500 transition-all"
-                  style={{ width: `${Math.min((pollRate / 1000) * 100, 100)}%` }}
-                />
+                <div className="h-full bg-green-500 transition-all" style={{ width: `${Math.min((pollRate / 1000) * 100, 100)}%` }} />
               </div>
             </div>
             <div>
               <div className="flex justify-between text-xs mb-1">
                 <span className="text-gray-400 font-mono">Precision</span>
-                <span className="text-cyan-400 font-mono">
-                  {dpi >= 1600 ? 'HIGH' : dpi >= 800 ? 'MEDIUM' : 'LOW'}
-                </span>
+                <span className="text-cyan-400 font-mono">{dpi >= 1600 ? "HIGH" : dpi >= 800 ? "MEDIUM" : "LOW"}</span>
               </div>
               <div className="h-2 bg-cyan-500/20 rounded-full overflow-hidden border border-cyan-500/30">
-                <div 
-                  className="h-full bg-cyan-500 transition-all"
-                  style={{ width: `${Math.min((dpi / 1600) * 100, 100)}%` }}
-                />
+                <div className="h-full bg-cyan-500 transition-all" style={{ width: `${Math.min((dpi / 1600) * 100, 100)}%` }} />
               </div>
             </div>
           </div>

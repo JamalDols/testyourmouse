@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
+import Link from "next/link";
 import "./globals.css";
 import { ProProvider } from "@/components/ProContext";
 import { Toaster } from "@/components/ui/sonner";
+import { CookieConsent } from "@/components/CookieConsent";
+import { Mouse, Coffee } from "lucide-react";
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -96,7 +99,89 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={jetbrainsMono.className}>
         <ProProvider>
-          {children}
+          <div className="min-h-screen">
+            {/* Header */}
+            <header className="border-b border-cyan-500/20 sticky top-0 z-50 backdrop-blur-sm bg-background/80" role="banner">
+              <div className="max-w-7xl mx-auto px-4 py-6">
+                <Link href="/" className="flex items-center gap-3 mb-2 hover:opacity-80 transition-opacity w-fit">
+                  <Mouse className="w-8 h-8 text-cyan-400" aria-hidden="true" />
+                  <h1 className="text-3xl font-medium tracking-wider text-cyan-400">TestYourMouse</h1>
+                </Link>
+                <p className="text-cyan-400/70 text-sm">Test your mouse like a pro</p>
+              </div>
+
+              {/* Navigation */}
+              <nav className="border-t border-cyan-500/20" role="navigation" aria-label="Main navigation">
+                <div className="max-w-7xl mx-auto px-4">
+                  <ul className="flex flex-wrap gap-2 py-3">
+                    <li>
+                      <Link href="/" className="px-4 py-2 rounded-md text-sm font-medium text-cyan-400/70 hover:text-cyan-400 hover:bg-cyan-500/10 transition-colors">
+                        Home
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/click-visualizer" className="px-4 py-2 rounded-md text-sm font-medium text-cyan-400/70 hover:text-cyan-400 hover:bg-cyan-500/10 transition-colors">
+                        Click Visualizer
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/double-click" className="px-4 py-2 rounded-md text-sm font-medium text-cyan-400/70 hover:text-cyan-400 hover:bg-cyan-500/10 transition-colors">
+                        Double Click Test
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/cps-test" className="px-4 py-2 rounded-md text-sm font-medium text-cyan-400/70 hover:text-cyan-400 hover:bg-cyan-500/10 transition-colors">
+                        CPS Test
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/scroll-test" className="px-4 py-2 rounded-md text-sm font-medium text-cyan-400/70 hover:text-cyan-400 hover:bg-cyan-500/10 transition-colors">
+                        Scroll Test
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/tracking-jitter" className="px-4 py-2 rounded-md text-sm font-medium text-cyan-400/70 hover:text-cyan-400 hover:bg-cyan-500/10 transition-colors">
+                        Tracking & Jitter
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/pro-tools" className="px-4 py-2 rounded-md text-sm font-medium text-purple-400/70 hover:text-purple-400 hover:bg-purple-500/10 transition-colors relative">
+                        Pro Tools
+                        <span className="absolute -top-1 -right-1 w-2 h-2 bg-purple-500 rounded-full animate-pulse" aria-hidden="true" />
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+            </header>
+
+            {/* Main Content */}
+            <main className="max-w-7xl mx-auto px-4 py-8" role="main">
+              {children}
+            </main>
+
+            {/* Footer */}
+            <footer className="border-t border-cyan-500/20 mt-16 py-8" role="contentinfo">
+              <div className="max-w-7xl mx-auto px-4 text-center text-sm text-cyan-400/50">
+                <p>© 2025 TestYourMouse.com • Made with ❤️ for gamers and tech enthusiasts</p>
+              </div>
+            </footer>
+
+            {/* Buy Me a Coffee Button */}
+            <a
+              href="https://www.buymeacoffee.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Buy me a coffee - Support this project"
+              className="fixed bottom-6 right-6 px-4 py-3 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-gray-900 rounded-full shadow-lg transition-all transform hover:scale-110 flex items-center gap-2 z-50 font-medium"
+            >
+              <Coffee className="w-5 h-5" aria-hidden="true" />
+              <span className="hidden sm:inline">Buy Me a Coffee</span>
+            </a>
+
+            {/* Cookie Consent Banner */}
+            <CookieConsent />
+          </div>
           <Toaster />
         </ProProvider>
       </body>

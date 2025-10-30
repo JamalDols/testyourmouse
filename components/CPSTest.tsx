@@ -1,8 +1,10 @@
-import { useState, useRef, useEffect } from 'react';
-import { Card } from './ui/card';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table';
-import { Badge } from './ui/badge';
-import { Timer, Trophy } from 'lucide-react';
+"use client";
+
+import { useState, useRef, useEffect } from "react";
+import { Card } from "./ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./ui/table";
+import { Badge } from "./ui/badge";
+import { Timer, Trophy } from "lucide-react";
 
 interface CPSResult {
   id: number;
@@ -23,7 +25,7 @@ export function CPSTest() {
   useEffect(() => {
     if (isActive && timeLeft > 0) {
       timerRef.current = setTimeout(() => {
-        setTimeLeft(prev => prev - 1);
+        setTimeLeft((prev) => prev - 1);
       }, 1000);
     } else if (isActive && timeLeft === 0) {
       endTest();
@@ -43,36 +45,34 @@ export function CPSTest() {
   const endTest = () => {
     setIsActive(false);
     const cps = Number((clicks / selectedDuration).toFixed(2));
-    
+
     const result: CPSResult = {
       id: Date.now(),
       clicks,
       cps,
       duration: selectedDuration,
-      timestamp: new Date().toLocaleTimeString('es-ES')
+      timestamp: new Date().toLocaleTimeString("es-ES"),
     };
 
-    setResults(prev => [result, ...prev].slice(0, 10));
+    setResults((prev) => [result, ...prev].slice(0, 10));
   };
 
   const handleClick = () => {
     if (!isActive) {
       startTest();
     }
-    setClicks(prev => prev + 1);
+    setClicks((prev) => prev + 1);
   };
 
   const currentCPS = timeLeft < selectedDuration ? (clicks / (selectedDuration - timeLeft)).toFixed(2) : 0;
 
-  const bestCPS = results.length > 0 ? Math.max(...results.map(r => r.cps)) : 0;
+  const bestCPS = results.length > 0 ? Math.max(...results.map((r) => r.cps)) : 0;
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       <div className="text-center mb-6">
         <h2 className="text-xl mb-2 text-cyan-400 tracking-wide">[CPS_ANALYZER]</h2>
-        <p className="text-gray-400 font-mono text-sm">
-          // Maximum speed detection
-        </p>
+        <p className="text-gray-400 font-mono text-sm">// Maximum speed detection</p>
       </div>
 
       <Card className="p-8 text-center bg-[#12121a] border-cyan-500/30">
@@ -88,8 +88,8 @@ export function CPSTest() {
                 disabled={isActive}
                 className={`px-4 py-2 rounded-lg transition-colors font-mono ${
                   selectedDuration === duration
-                    ? 'bg-cyan-500/20 text-cyan-400 border-2 border-cyan-500'
-                    : 'bg-cyan-500/5 border border-cyan-500/30 text-gray-400 hover:bg-cyan-500/10 hover:text-cyan-400'
+                    ? "bg-cyan-500/20 text-cyan-400 border-2 border-cyan-500"
+                    : "bg-cyan-500/5 border border-cyan-500/30 text-gray-400 hover:bg-cyan-500/10 hover:text-cyan-400"
                 } disabled:opacity-50`}
               >
                 {duration}s
@@ -144,9 +144,7 @@ export function CPSTest() {
       <Card className="p-4 bg-[#12121a] border-cyan-500/30">
         <h3 className="mb-4 text-cyan-400 tracking-wide">[HISTORY]</h3>
         {results.length === 0 ? (
-          <p className="text-sm text-gray-500 text-center py-8 font-mono">
-            // NO_DATA_AVAILABLE
-          </p>
+          <p className="text-sm text-gray-500 text-center py-8 font-mono">// NO_DATA_AVAILABLE</p>
         ) : (
           <Table>
             <TableHeader>
@@ -164,9 +162,9 @@ export function CPSTest() {
                   <TableCell className="text-right font-mono tabular-nums">{result.clicks}</TableCell>
                   <TableCell className="text-right font-mono">{result.duration}s</TableCell>
                   <TableCell className="text-right">
-                    <Badge 
-                      variant={result.cps === bestCPS ? 'default' : 'outline'}
-                      className={`font-mono ${result.cps === bestCPS ? 'bg-yellow-500/20 text-yellow-400 border-yellow-500/50' : 'border-gray-600'}`}
+                    <Badge
+                      variant={result.cps === bestCPS ? "default" : "outline"}
+                      className={`font-mono ${result.cps === bestCPS ? "bg-yellow-500/20 text-yellow-400 border-yellow-500/50" : "border-gray-600"}`}
                     >
                       {result.cps}
                     </Badge>

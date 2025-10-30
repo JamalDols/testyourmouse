@@ -89,7 +89,7 @@ Herramientas gratuitas + Pro Tools mediante Stripe + Donaciones.
 
 - [ ] Animaciones con `framer-motion`
 - [ ] Responsive completo
-- [ ] SEO básico (`next/head`, OG tags, título dinámico)
+- [ ] SEO básico (`next/head`, OG tags, título dinámico, OG Dinámicas)
 - [ ] Despliegue en Vercel + dominio `testyourmouse.com`
 - [ ] Analíticas básicas (Google Analytics o similar)
 - [ ] Pruebas unitarias con `Jest` y `React Testing Library`

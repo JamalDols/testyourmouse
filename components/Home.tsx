@@ -1,14 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { Mouse, Zap, Target, MousePointer2, Activity, Gauge, Lock, ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
 
-interface HomeProps {
-  onNavigateToTool: (tool: string) => void;
-}
-
-export function Home({ onNavigateToTool }: HomeProps) {
+export function Home() {
   return (
     <div className="max-w-5xl mx-auto space-y-12">
       {/* Hero Section */}
@@ -106,69 +103,78 @@ export function Home({ onNavigateToTool }: HomeProps) {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <Card className="p-6 bg-[#12121a] border-cyan-500/30 hover:border-cyan-500/50 transition-all hover:glow-cyan group cursor-pointer" onClick={() => onNavigateToTool("click-visualizer")}>
-            <div className="flex items-center gap-3 mb-3">
-              <div className="p-2 bg-cyan-500/10 rounded-lg border border-cyan-500/30 group-hover:border-cyan-500/50 transition-colors">
-                <MousePointer2 className="w-5 h-5 text-cyan-400" />
+          <Link href="/click-visualizer">
+            <Card className="p-6 bg-[#12121a] border-cyan-500/30 hover:border-cyan-500/50 transition-all hover:glow-cyan group cursor-pointer h-full">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="p-2 bg-cyan-500/10 rounded-lg border border-cyan-500/30 group-hover:border-cyan-500/50 transition-colors">
+                  <MousePointer2 className="w-5 h-5 text-cyan-400" />
+                </div>
+                <h3 className="text-cyan-400 font-mono">Click Visualizer</h3>
               </div>
-              <h3 className="text-cyan-400 font-mono">Click Visualizer</h3>
-            </div>
-            <p className="text-sm text-gray-400">Visualize all your clicks in real-time. Detect unintentional double clicks and usage patterns.</p>
-          </Card>
+              <p className="text-sm text-gray-400">Visualize all your clicks in real-time. Detect unintentional double clicks and usage patterns.</p>
+            </Card>
+          </Link>
 
-          <Card className="p-6 bg-[#12121a] border-cyan-500/30 hover:border-cyan-500/50 transition-all hover:glow-cyan group cursor-pointer" onClick={() => onNavigateToTool("double-click")}>
-            <div className="flex items-center gap-3 mb-3">
-              <div className="p-2 bg-cyan-500/10 rounded-lg border border-cyan-500/30 group-hover:border-cyan-500/50 transition-colors">
-                <Mouse className="w-5 h-5 text-cyan-400" />
+          <Link href="/double-click">
+            <Card className="p-6 bg-[#12121a] border-cyan-500/30 hover:border-cyan-500/50 transition-all hover:glow-cyan group cursor-pointer h-full">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="p-2 bg-cyan-500/10 rounded-lg border border-cyan-500/30 group-hover:border-cyan-500/50 transition-colors">
+                  <Mouse className="w-5 h-5 text-cyan-400" />
+                </div>
+                <h3 className="text-cyan-400 font-mono">Double Click Test</h3>
               </div>
-              <h3 className="text-cyan-400 font-mono">Double Click Test</h3>
-            </div>
-            <p className="text-sm text-gray-400">Test your click stability. Identify if your mouse suffers from unwanted double clicking.</p>
-          </Card>
+              <p className="text-sm text-gray-400">Test your click stability. Identify if your mouse suffers from unwanted double clicking.</p>
+            </Card>
+          </Link>
 
-          <Card className="p-6 bg-[#12121a] border-cyan-500/30 hover:border-cyan-500/50 transition-all hover:glow-cyan group cursor-pointer" onClick={() => onNavigateToTool("cps-test")}>
-            <div className="flex items-center gap-3 mb-3">
-              <div className="p-2 bg-cyan-500/10 rounded-lg border border-cyan-500/30 group-hover:border-cyan-500/50 transition-colors">
-                <Zap className="w-5 h-5 text-cyan-400" />
+          <Link href="/cps-test">
+            <Card className="p-6 bg-[#12121a] border-cyan-500/30 hover:border-cyan-500/50 transition-all hover:glow-cyan group cursor-pointer h-full">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="p-2 bg-cyan-500/10 rounded-lg border border-cyan-500/30 group-hover:border-cyan-500/50 transition-colors">
+                  <Zap className="w-5 h-5 text-cyan-400" />
+                </div>
+                <h3 className="text-cyan-400 font-mono">CPS Test</h3>
               </div>
-              <h3 className="text-cyan-400 font-mono">CPS Test</h3>
-            </div>
-            <p className="text-sm text-gray-400">Measure your clicks per second speed. Perfect for gamers who need fast clicking.</p>
-          </Card>
+              <p className="text-sm text-gray-400">Measure your clicks per second speed. Perfect for gamers who need fast clicking.</p>
+            </Card>
+          </Link>
 
-          <Card className="p-6 bg-[#12121a] border-cyan-500/30 hover:border-cyan-500/50 transition-all hover:glow-cyan group cursor-pointer" onClick={() => onNavigateToTool("scroll-test")}>
-            <div className="flex items-center gap-3 mb-3">
-              <div className="p-2 bg-cyan-500/10 rounded-lg border border-cyan-500/30 group-hover:border-cyan-500/50 transition-colors">
-                <Activity className="w-5 h-5 text-cyan-400" />
+          <Link href="/scroll-test">
+            <Card className="p-6 bg-[#12121a] border-cyan-500/30 hover:border-cyan-500/50 transition-all hover:glow-cyan group cursor-pointer h-full">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="p-2 bg-cyan-500/10 rounded-lg border border-cyan-500/30 group-hover:border-cyan-500/50 transition-colors">
+                  <Activity className="w-5 h-5 text-cyan-400" />
+                </div>
+                <h3 className="text-cyan-400 font-mono">Scroll Test</h3>
               </div>
-              <h3 className="text-cyan-400 font-mono">Scroll Test</h3>
-            </div>
-            <p className="text-sm text-gray-400">Evaluate your scroll wheel's precision and smoothness with detailed metrics.</p>
-          </Card>
+              <p className="text-sm text-gray-400">Evaluate your scroll wheel's precision and smoothness with detailed metrics.</p>
+            </Card>
+          </Link>
 
-          <Card className="p-6 bg-[#12121a] border-cyan-500/30 hover:border-cyan-500/50 transition-all hover:glow-cyan group cursor-pointer" onClick={() => onNavigateToTool("tracking-jitter")}>
-            <div className="flex items-center gap-3 mb-3">
-              <div className="p-2 bg-cyan-500/10 rounded-lg border border-cyan-500/30 group-hover:border-cyan-500/50 transition-colors">
-                <Target className="w-5 h-5 text-cyan-400" />
+          <Link href="/tracking-jitter">
+            <Card className="p-6 bg-[#12121a] border-cyan-500/30 hover:border-cyan-500/50 transition-all hover:glow-cyan group cursor-pointer h-full">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="p-2 bg-cyan-500/10 rounded-lg border border-cyan-500/30 group-hover:border-cyan-500/50 transition-colors">
+                  <Target className="w-5 h-5 text-cyan-400" />
+                </div>
+                <h3 className="text-cyan-400 font-mono">Tracking & Jitter</h3>
               </div>
-              <h3 className="text-cyan-400 font-mono">Tracking & Jitter</h3>
-            </div>
-            <p className="text-sm text-gray-400">Analyze sensor precision and detect unwanted jitter or acceleration.</p>
-          </Card>
+              <p className="text-sm text-gray-400">Analyze sensor precision and detect unwanted jitter or acceleration.</p>
+            </Card>
+          </Link>
 
-          <Card
-            className="p-6 bg-gradient-to-br from-purple-500/10 to-cyan-500/10 border-purple-500/50 hover:border-purple-500 transition-all glow-purple group cursor-pointer"
-            onClick={() => onNavigateToTool("pro-tools")}
-          >
-            <div className="flex items-center gap-3 mb-3">
-              <div className="p-2 bg-purple-500/20 rounded-lg border border-purple-500/50 group-hover:border-purple-500/70 transition-colors">
-                <Lock className="w-5 h-5 text-purple-400" />
+          <Link href="/pro-tools">
+            <Card className="p-6 bg-gradient-to-br from-purple-500/10 to-cyan-500/10 border-purple-500/50 hover:border-purple-500 transition-all glow-purple group cursor-pointer h-full">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="p-2 bg-purple-500/20 rounded-lg border border-purple-500/50 group-hover:border-purple-500/70 transition-colors">
+                  <Lock className="w-5 h-5 text-purple-400" />
+                </div>
+                <h3 className="text-purple-400 font-mono">Pro Tools</h3>
+                <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/50 font-mono text-xs">$5</Badge>
               </div>
-              <h3 className="text-purple-400 font-mono">Pro Tools</h3>
-              <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/50 font-mono text-xs">$5</Badge>
-            </div>
-            <p className="text-sm text-gray-400">Advanced professional tools: Reaction Time, Sensor Analysis, Response Graph and more.</p>
-          </Card>
+              <p className="text-sm text-gray-400">Advanced professional tools: Reaction Time, Sensor Analysis, Response Graph and more.</p>
+            </Card>
+          </Link>
         </div>
       </div>
 

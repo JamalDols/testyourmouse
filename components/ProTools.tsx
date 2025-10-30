@@ -1,49 +1,51 @@
-import { Card } from './ui/card';
-import { Badge } from './ui/badge';
-import { Lock, Zap, Target, Gauge, TrendingUp, Award, Unlock, CheckCircle2 } from 'lucide-react';
-import { useProContext } from './ProContext';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
-import { ReactionTimeTest } from './pro/ReactionTimeTest';
-import { PixelPerfectTest } from './pro/PixelPerfectTest';
-import { SensorAnalysis } from './pro/SensorAnalysis';
-import { ResponseTimeGraph } from './pro/ResponseTimeGraph';
-import { toast } from 'sonner';
+"use client";
+
+import { Card } from "./ui/card";
+import { Badge } from "./ui/badge";
+import { Lock, Zap, Target, Gauge, TrendingUp, Award, Unlock, CheckCircle2 } from "lucide-react";
+import { useProContext } from "./ProContext";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+import { ReactionTimeTest } from "./pro/ReactionTimeTest";
+import { PixelPerfectTest } from "./pro/PixelPerfectTest";
+import { SensorAnalysis } from "./pro/SensorAnalysis";
+import { ResponseTimeGraph } from "./pro/ResponseTimeGraph";
+import { toast } from "sonner";
 
 export function ProTools() {
   const { isProUnlocked, unlockPro } = useProContext();
 
   const handleUnlock = () => {
     unlockPro();
-    toast.success('[PRO_UNLOCKED]', {
-      description: 'All professional tools are now available!',
+    toast.success("[PRO_UNLOCKED]", {
+      description: "All professional tools are now available!",
       duration: 3000,
     });
   };
 
   const handleReset = () => {
-    localStorage.removeItem('testyourmouse_pro_unlocked');
+    localStorage.removeItem("testyourmouse_pro_unlocked");
     window.location.reload();
   };
   const proFeatures = [
     {
       icon: Zap,
-      title: 'Reaction Time Test',
-      description: 'Measure precise mouse reaction time',
+      title: "Reaction Time Test",
+      description: "Measure precise mouse reaction time",
     },
     {
       icon: Target,
-      title: 'Pixel Perfect Test',
-      description: 'Evaluate precision with dynamic targets',
+      title: "Pixel Perfect Test",
+      description: "Evaluate precision with dynamic targets",
     },
     {
       icon: Gauge,
-      title: 'Sensor Analysis',
-      description: 'Advanced DPI and polling rate detection',
+      title: "Sensor Analysis",
+      description: "Advanced DPI and polling rate detection",
     },
     {
       icon: TrendingUp,
-      title: 'Response Time Graph',
-      description: 'Real-time latency visualization',
+      title: "Response Time Graph",
+      description: "Real-time latency visualization",
     },
   ];
 
@@ -61,16 +63,28 @@ export function ProTools() {
 
         <Tabs defaultValue="reaction-time" className="w-full">
           <TabsList className="w-full justify-start mb-8 bg-[#12121a] border border-cyan-500/20 p-1 flex-wrap h-auto">
-            <TabsTrigger value="reaction-time" className="flex-1 min-w-[140px] data-[state=active]:bg-cyan-500/10 data-[state=active]:text-cyan-400 data-[state=active]:border-cyan-500/50 text-gray-400 hover:text-cyan-300 transition-colors">
+            <TabsTrigger
+              value="reaction-time"
+              className="flex-1 min-w-[140px] data-[state=active]:bg-cyan-500/10 data-[state=active]:text-cyan-400 data-[state=active]:border-cyan-500/50 text-gray-400 hover:text-cyan-300 transition-colors"
+            >
               [REACTION]
             </TabsTrigger>
-            <TabsTrigger value="pixel-perfect" className="flex-1 min-w-[140px] data-[state=active]:bg-cyan-500/10 data-[state=active]:text-cyan-400 data-[state=active]:border-cyan-500/50 text-gray-400 hover:text-cyan-300 transition-colors">
+            <TabsTrigger
+              value="pixel-perfect"
+              className="flex-1 min-w-[140px] data-[state=active]:bg-cyan-500/10 data-[state=active]:text-cyan-400 data-[state=active]:border-cyan-500/50 text-gray-400 hover:text-cyan-300 transition-colors"
+            >
               [PRECISION]
             </TabsTrigger>
-            <TabsTrigger value="sensor-analysis" className="flex-1 min-w-[140px] data-[state=active]:bg-cyan-500/10 data-[state=active]:text-cyan-400 data-[state=active]:border-cyan-500/50 text-gray-400 hover:text-cyan-300 transition-colors">
+            <TabsTrigger
+              value="sensor-analysis"
+              className="flex-1 min-w-[140px] data-[state=active]:bg-cyan-500/10 data-[state=active]:text-cyan-400 data-[state=active]:border-cyan-500/50 text-gray-400 hover:text-cyan-300 transition-colors"
+            >
               [SENSOR]
             </TabsTrigger>
-            <TabsTrigger value="response-graph" className="flex-1 min-w-[140px] data-[state=active]:bg-cyan-500/10 data-[state=active]:text-cyan-400 data-[state=active]:border-cyan-500/50 text-gray-400 hover:text-cyan-300 transition-colors">
+            <TabsTrigger
+              value="response-graph"
+              className="flex-1 min-w-[140px] data-[state=active]:bg-cyan-500/10 data-[state=active]:text-cyan-400 data-[state=active]:border-cyan-500/50 text-gray-400 hover:text-cyan-300 transition-colors"
+            >
               [LATENCY]
             </TabsTrigger>
           </TabsList>
@@ -104,19 +118,17 @@ export function ProTools() {
             <Badge className="absolute -top-2 -right-2 bg-purple-500 border border-purple-400 font-mono">PRO</Badge>
           </div>
         </div>
-        
+
         <h2 className="text-2xl mb-3 text-purple-400 tracking-wide">[PROFESSIONAL_TOOLS]</h2>
-        <p className="text-gray-400 mb-6 font-mono text-sm">
-          // Advanced metrics & analysis
-        </p>
+        <p className="text-gray-400 mb-6 font-mono text-sm">// Advanced metrics & analysis</p>
 
         {/* Sales Copy */}
         <div className="max-w-2xl mx-auto mb-8 text-left space-y-4">
           <p className="text-gray-300 text-sm leading-relaxed font-mono">
-            <span className="text-cyan-400">&gt;</span> ¿Eres un <span className="text-cyan-400">gamer competitivo</span> o un <span className="text-purple-400">entusiasta del hardware</span>? 
-            Lleva tu análisis al siguiente nivel con nuestras herramientas profesionales.
+            <span className="text-cyan-400">&gt;</span> ¿Eres un <span className="text-cyan-400">gamer competitivo</span> o un <span className="text-purple-400">entusiasta del hardware</span>? Lleva
+            tu análisis al siguiente nivel con nuestras herramientas profesionales.
           </p>
-          
+
           <div className="bg-[#12121a] border border-cyan-500/20 rounded-lg p-4">
             <div className="grid md:grid-cols-2 gap-3 text-xs font-mono text-gray-400">
               <div className="flex items-start gap-2">
@@ -147,7 +159,7 @@ export function ProTools() {
           </div>
 
           <p className="text-gray-300 text-sm leading-relaxed font-mono">
-            <span className="text-cyan-400">&gt;</span> Únete a miles de gamers y profesionales que ya confían en TestYourMouse PRO para 
+            <span className="text-cyan-400">&gt;</span> Únete a miles de gamers y profesionales que ya confían en TestYourMouse PRO para
             <span className="text-purple-400"> optimizar su setup</span> y dominar su rendimiento.
           </p>
         </div>
@@ -165,7 +177,7 @@ export function ProTools() {
           </div>
         </div>
 
-        <button 
+        <button
           onClick={handleUnlock}
           className="w-full max-w-md mx-auto px-8 py-4 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 hover:from-cyan-500/30 hover:to-purple-500/30 border-2 border-purple-500/50 hover:border-purple-500 text-purple-400 rounded-lg transition-all transform hover:scale-105 glow-purple font-mono tracking-wider flex items-center justify-center gap-2"
         >
@@ -173,9 +185,7 @@ export function ProTools() {
           [UNLOCK_NOW]
         </button>
 
-        <p className="text-xs text-gray-500 mt-4 font-mono">
-          ONE_TIME_PAYMENT • LIFETIME_ACCESS • NO_SUBSCRIPTION
-        </p>
+        <p className="text-xs text-gray-500 mt-4 font-mono">ONE_TIME_PAYMENT • LIFETIME_ACCESS • NO_SUBSCRIPTION</p>
       </Card>
 
       <div className="grid gap-4">
@@ -191,9 +201,7 @@ export function ProTools() {
                   <h4 className="text-cyan-400 font-mono tracking-wide">{feature.title}</h4>
                   <Lock className="w-4 h-4 text-purple-400 animate-pulse" />
                 </div>
-                <p className="text-sm text-gray-400 font-mono">
-                  {feature.description}
-                </p>
+                <p className="text-sm text-gray-400 font-mono">{feature.description}</p>
               </div>
             </div>
           </Card>
@@ -206,7 +214,7 @@ export function ProTools() {
           <span className="text-cyan-400">100% satisfacción garantizada</span> • Si no estás satisfecho, te devolvemos tu dinero en 30 días
         </p>
         <p className="text-xs text-gray-400 font-mono">
-          NEED_HELP? 
+          NEED_HELP?
           <span className="text-cyan-400 mx-2">→</span>
           <a href="mailto:support@testyourmouse.com" className="text-cyan-400 hover:text-cyan-300 underline">
             support@testyourmouse.com
