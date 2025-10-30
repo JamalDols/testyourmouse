@@ -5,7 +5,9 @@ import "./globals.css";
 import { ProProvider } from "@/components/ProContext";
 import { Toaster } from "@/components/ui/sonner";
 import { CookieConsent } from "@/components/CookieConsent";
-import { Mouse, Coffee } from "lucide-react";
+import { NavLink } from "@/components/NavLink";
+import { DonationButton } from "@/components/DonationButton";
+import { Mouse } from "lucide-react";
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -115,40 +117,27 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <div className="max-w-7xl mx-auto px-4">
                   <ul className="flex flex-wrap gap-2 py-3">
                     <li>
-                      <Link href="/" className="px-4 py-2 rounded-md text-sm font-medium text-cyan-400/70 hover:text-cyan-400 hover:bg-cyan-500/10 transition-colors">
-                        Home
-                      </Link>
+                      <NavLink href="/">Home</NavLink>
                     </li>
                     <li>
-                      <Link href="/click-visualizer" className="px-4 py-2 rounded-md text-sm font-medium text-cyan-400/70 hover:text-cyan-400 hover:bg-cyan-500/10 transition-colors">
-                        Click Visualizer
-                      </Link>
+                      <NavLink href="/click-visualizer">Click Visualizer</NavLink>
                     </li>
                     <li>
-                      <Link href="/double-click" className="px-4 py-2 rounded-md text-sm font-medium text-cyan-400/70 hover:text-cyan-400 hover:bg-cyan-500/10 transition-colors">
-                        Double Click Test
-                      </Link>
+                      <NavLink href="/double-click">Double Click Test</NavLink>
                     </li>
                     <li>
-                      <Link href="/cps-test" className="px-4 py-2 rounded-md text-sm font-medium text-cyan-400/70 hover:text-cyan-400 hover:bg-cyan-500/10 transition-colors">
-                        CPS Test
-                      </Link>
+                      <NavLink href="/cps-test">CPS Test</NavLink>
                     </li>
                     <li>
-                      <Link href="/scroll-test" className="px-4 py-2 rounded-md text-sm font-medium text-cyan-400/70 hover:text-cyan-400 hover:bg-cyan-500/10 transition-colors">
-                        Scroll Test
-                      </Link>
+                      <NavLink href="/scroll-test">Scroll Test</NavLink>
                     </li>
                     <li>
-                      <Link href="/tracking-jitter" className="px-4 py-2 rounded-md text-sm font-medium text-cyan-400/70 hover:text-cyan-400 hover:bg-cyan-500/10 transition-colors">
-                        Tracking & Jitter
-                      </Link>
+                      <NavLink href="/tracking-jitter">Tracking & Jitter</NavLink>
                     </li>
                     <li>
-                      <Link href="/pro-tools" className="px-4 py-2 rounded-md text-sm font-medium text-purple-400/70 hover:text-purple-400 hover:bg-purple-500/10 transition-colors relative">
+                      <NavLink href="/pro-tools" isPro>
                         Pro Tools
-                        <span className="absolute -top-1 -right-1 w-2 h-2 bg-purple-500 rounded-full animate-pulse" aria-hidden="true" />
-                      </Link>
+                      </NavLink>
                     </li>
                   </ul>
                 </div>
@@ -168,16 +157,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </footer>
 
             {/* Buy Me a Coffee Button */}
-            <a
-              href="https://www.buymeacoffee.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Buy me a coffee - Support this project"
-              className="fixed bottom-6 right-6 px-4 py-3 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-gray-900 rounded-full shadow-lg transition-all transform hover:scale-110 flex items-center gap-2 z-50 font-medium"
-            >
-              <Coffee className="w-5 h-5" aria-hidden="true" />
-              <span className="hidden sm:inline">Buy Me a Coffee</span>
-            </a>
+            <DonationButton />
 
             {/* Cookie Consent Banner */}
             <CookieConsent />

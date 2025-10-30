@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { Mouse, Zap, Target, MousePointer2, Activity, Gauge, Lock, ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
+import { trackToolAccess } from "@/lib/analytics";
 
 export function Home() {
   return (
@@ -103,7 +104,7 @@ export function Home() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <Link href="/click-visualizer">
+          <Link href="/click-visualizer" onClick={() => trackToolAccess("click-visualizer")}>
             <Card className="p-6 bg-[#12121a] border-cyan-500/30 hover:border-cyan-500/50 transition-all hover:glow-cyan group cursor-pointer h-full">
               <div className="flex items-center gap-3 mb-3">
                 <div className="p-2 bg-cyan-500/10 rounded-lg border border-cyan-500/30 group-hover:border-cyan-500/50 transition-colors">
@@ -115,7 +116,7 @@ export function Home() {
             </Card>
           </Link>
 
-          <Link href="/double-click">
+          <Link href="/double-click" onClick={() => trackToolAccess("double-click")}>
             <Card className="p-6 bg-[#12121a] border-cyan-500/30 hover:border-cyan-500/50 transition-all hover:glow-cyan group cursor-pointer h-full">
               <div className="flex items-center gap-3 mb-3">
                 <div className="p-2 bg-cyan-500/10 rounded-lg border border-cyan-500/30 group-hover:border-cyan-500/50 transition-colors">
@@ -127,7 +128,7 @@ export function Home() {
             </Card>
           </Link>
 
-          <Link href="/cps-test">
+          <Link href="/cps-test" onClick={() => trackToolAccess("cps-test")}>
             <Card className="p-6 bg-[#12121a] border-cyan-500/30 hover:border-cyan-500/50 transition-all hover:glow-cyan group cursor-pointer h-full">
               <div className="flex items-center gap-3 mb-3">
                 <div className="p-2 bg-cyan-500/10 rounded-lg border border-cyan-500/30 group-hover:border-cyan-500/50 transition-colors">
@@ -139,7 +140,7 @@ export function Home() {
             </Card>
           </Link>
 
-          <Link href="/scroll-test">
+          <Link href="/scroll-test" onClick={() => trackToolAccess("scroll-test")}>
             <Card className="p-6 bg-[#12121a] border-cyan-500/30 hover:border-cyan-500/50 transition-all hover:glow-cyan group cursor-pointer h-full">
               <div className="flex items-center gap-3 mb-3">
                 <div className="p-2 bg-cyan-500/10 rounded-lg border border-cyan-500/30 group-hover:border-cyan-500/50 transition-colors">
@@ -151,7 +152,7 @@ export function Home() {
             </Card>
           </Link>
 
-          <Link href="/tracking-jitter">
+          <Link href="/tracking-jitter" onClick={() => trackToolAccess("tracking-jitter")}>
             <Card className="p-6 bg-[#12121a] border-cyan-500/30 hover:border-cyan-500/50 transition-all hover:glow-cyan group cursor-pointer h-full">
               <div className="flex items-center gap-3 mb-3">
                 <div className="p-2 bg-cyan-500/10 rounded-lg border border-cyan-500/30 group-hover:border-cyan-500/50 transition-colors">
@@ -163,7 +164,7 @@ export function Home() {
             </Card>
           </Link>
 
-          <Link href="/pro-tools">
+          <Link href="/pro-tools" onClick={() => trackToolAccess("pro-tools")}>
             <Card className="p-6 bg-gradient-to-br from-purple-500/10 to-cyan-500/10 border-purple-500/50 hover:border-purple-500 transition-all glow-purple group cursor-pointer h-full">
               <div className="flex items-center gap-3 mb-3">
                 <div className="p-2 bg-purple-500/20 rounded-lg border border-purple-500/50 group-hover:border-purple-500/70 transition-colors">

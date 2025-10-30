@@ -10,11 +10,15 @@ import { PixelPerfectTest } from "./pro/PixelPerfectTest";
 import { SensorAnalysis } from "./pro/SensorAnalysis";
 import { ResponseTimeGraph } from "./pro/ResponseTimeGraph";
 import { toast } from "sonner";
+import { trackProPaymentIntent } from "@/lib/analytics";
 
 export function ProTools() {
   const { isProUnlocked, unlockPro } = useProContext();
 
   const handleUnlock = () => {
+    // Track payment intent
+    trackProPaymentIntent();
+
     unlockPro();
     toast.success("[PRO_UNLOCKED]", {
       description: "All professional tools are now available!",
