@@ -10,6 +10,7 @@ import { TrackingJitter } from "@/components/TrackingJitter";
 import { ProTools } from "@/components/ProTools";
 import { Coffee, Mouse, Home as HomeIcon } from "lucide-react";
 import { useState } from "react";
+import Script from "next/script";
 
 export default function Page() {
   const [activeTab, setActiveTab] = useState("home");
@@ -18,95 +19,165 @@ export default function Page() {
     setActiveTab(tool);
   };
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://testyourmouse.com/#website",
+        url: "https://testyourmouse.com",
+        name: "TestYourMouse",
+        description: "Herramientas profesionales gratuitas para testear tu ratón",
+        inLanguage: "es-ES",
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://testyourmouse.com/#webapp",
+        url: "https://testyourmouse.com",
+        name: "TestYourMouse",
+        description: "Suite profesional de herramientas para testear ratones gaming",
+        applicationCategory: "UtilitiesApplication",
+        operatingSystem: "Web Browser",
+        offers: {
+          "@type": "Offer",
+          price: "0",
+          priceCurrency: "EUR",
+        },
+        featureList: [
+          "CPS Test - Test de velocidad de clicks",
+          "Double Click Test - Detector de doble click",
+          "Click Visualizer - Visualizador de clicks",
+          "Scroll Test - Analizador de scroll",
+          "Tracking & Jitter - Test de precisión",
+          "Pro Tools - Herramientas profesionales",
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://testyourmouse.com/#faq",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: "¿Qué es TestYourMouse?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "TestYourMouse es una suite profesional de herramientas gratuitas diseñada para testear todos los aspectos de tu ratón gaming: velocidad de clicks (CPS), doble click, precisión, tracking, jitter y más.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "¿Es gratis usar TestYourMouse?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Sí, todas las herramientas básicas son 100% gratuitas y no requieren registro.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "¿Qué es un CPS Test?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "CPS significa Clicks Per Second (Clicks por Segundo). Es una medida de qué tan rápido puedes hacer click con tu ratón. Un buen CPS para gaming está entre 5-10 clicks por segundo.",
+            },
+          },
+        ],
+      },
+    ],
+  };
+
   return (
-    <div className="min-h-screen">
-      {/* Header */}
-      <header className="border-b border-cyan-500/20 sticky top-0 z-50 backdrop-blur-sm bg-background/80">
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <div className="flex items-center gap-3 mb-2">
-            <Mouse className="w-8 h-8 text-cyan-400" />
-            <h1 className="text-3xl font-medium tracking-wider text-cyan-400">TestYourMouse</h1>
+    <>
+      <Script id="structured-data" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+      <div className="min-h-screen">
+        {/* Header */}
+        <header className="border-b border-cyan-500/20 sticky top-0 z-50 backdrop-blur-sm bg-background/80" role="banner">
+          <div className="max-w-7xl mx-auto px-4 py-6">
+            <div className="flex items-center gap-3 mb-2">
+              <Mouse className="w-8 h-8 text-cyan-400" aria-hidden="true" />
+              <h1 className="text-3xl font-medium tracking-wider text-cyan-400">TestYourMouse</h1>
+            </div>
+            <p className="text-cyan-400/70 text-sm">Testea tu ratón como un pro</p>
           </div>
-          <p className="text-cyan-400/70 text-sm">Testea tu ratón como un pro</p>
-        </div>
-      </header>
+        </header>
 
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 py-8">
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="w-full justify-start mb-8 bg-cyan-500/10 border border-cyan-500/30 p-1 flex-wrap h-auto">
-            <TabsTrigger value="home" className="flex-1 min-w-[140px]">
-              <HomeIcon className="w-4 h-4 mr-2" />
-              Home
-            </TabsTrigger>
-            <TabsTrigger value="click-visualizer" className="flex-1 min-w-[140px]">
-              Click Visualizer
-            </TabsTrigger>
-            <TabsTrigger value="double-click" className="flex-1 min-w-[140px]">
-              Double Click Test
-            </TabsTrigger>
-            <TabsTrigger value="cps-test" className="flex-1 min-w-[140px]">
-              CPS Test
-            </TabsTrigger>
-            <TabsTrigger value="scroll-test" className="flex-1 min-w-[140px]">
-              Scroll Test
-            </TabsTrigger>
-            <TabsTrigger value="tracking-jitter" className="flex-1 min-w-[140px]">
-              Tracking & Jitter
-            </TabsTrigger>
-            <TabsTrigger value="pro-tools" className="flex-1 min-w-[140px] relative">
-              Pro Tools
-              <span className="absolute -top-1 -right-1 w-2 h-2 bg-purple-500 rounded-full animate-pulse" />
-            </TabsTrigger>
-          </TabsList>
+        {/* Main Content */}
+        <main className="max-w-7xl mx-auto px-4 py-8" role="main">
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+            <TabsList className="w-full justify-start mb-8 bg-cyan-500/10 border border-cyan-500/30 p-1 flex-wrap h-auto" role="tablist" aria-label="Herramientas de testeo de ratón">
+              <TabsTrigger value="home" className="flex-1 min-w-[140px]" aria-label="Página de inicio">
+                <HomeIcon className="w-4 h-4 mr-2" aria-hidden="true" />
+                Home
+              </TabsTrigger>
+              <TabsTrigger value="click-visualizer" className="flex-1 min-w-[140px]" aria-label="Visualizador de clicks">
+                Click Visualizer
+              </TabsTrigger>
+              <TabsTrigger value="double-click" className="flex-1 min-w-[140px]" aria-label="Test de doble click">
+                Double Click Test
+              </TabsTrigger>
+              <TabsTrigger value="cps-test" className="flex-1 min-w-[140px]" aria-label="Test de velocidad de clicks por segundo">
+                CPS Test
+              </TabsTrigger>
+              <TabsTrigger value="scroll-test" className="flex-1 min-w-[140px]" aria-label="Test de scroll del ratón">
+                Scroll Test
+              </TabsTrigger>
+              <TabsTrigger value="tracking-jitter" className="flex-1 min-w-[140px]" aria-label="Test de tracking y jitter">
+                Tracking & Jitter
+              </TabsTrigger>
+              <TabsTrigger value="pro-tools" className="flex-1 min-w-[140px] relative" aria-label="Herramientas profesionales">
+                Pro Tools
+                <span className="absolute -top-1 -right-1 w-2 h-2 bg-purple-500 rounded-full animate-pulse" aria-hidden="true" />
+              </TabsTrigger>
+            </TabsList>
 
-          <TabsContent value="home" className="mt-0">
-            <Home onNavigateToTool={handleNavigateToTool} />
-          </TabsContent>
+            <TabsContent value="home" className="mt-0" role="tabpanel" aria-labelledby="home-tab">
+              <Home onNavigateToTool={handleNavigateToTool} />
+            </TabsContent>
 
-          <TabsContent value="click-visualizer" className="mt-0">
-            <ClickVisualizer />
-          </TabsContent>
+            <TabsContent value="click-visualizer" className="mt-0" role="tabpanel" aria-labelledby="click-visualizer-tab">
+              <ClickVisualizer />
+            </TabsContent>
 
-          <TabsContent value="double-click" className="mt-0">
-            <DoubleClickTest />
-          </TabsContent>
+            <TabsContent value="double-click" className="mt-0" role="tabpanel" aria-labelledby="double-click-tab">
+              <DoubleClickTest />
+            </TabsContent>
 
-          <TabsContent value="cps-test" className="mt-0">
-            <CPSTest />
-          </TabsContent>
+            <TabsContent value="cps-test" className="mt-0" role="tabpanel" aria-labelledby="cps-test-tab">
+              <CPSTest />
+            </TabsContent>
 
-          <TabsContent value="scroll-test" className="mt-0">
-            <ScrollTest />
-          </TabsContent>
+            <TabsContent value="scroll-test" className="mt-0" role="tabpanel" aria-labelledby="scroll-test-tab">
+              <ScrollTest />
+            </TabsContent>
 
-          <TabsContent value="tracking-jitter" className="mt-0">
-            <TrackingJitter />
-          </TabsContent>
+            <TabsContent value="tracking-jitter" className="mt-0" role="tabpanel" aria-labelledby="tracking-jitter-tab">
+              <TrackingJitter />
+            </TabsContent>
 
-          <TabsContent value="pro-tools" className="mt-0">
-            <ProTools />
-          </TabsContent>
-        </Tabs>
-      </main>
+            <TabsContent value="pro-tools" className="mt-0" role="tabpanel" aria-labelledby="pro-tools-tab">
+              <ProTools />
+            </TabsContent>
+          </Tabs>
+        </main>
 
-      {/* Footer */}
-      <footer className="border-t border-cyan-500/20 mt-16 py-8">
-        <div className="max-w-7xl mx-auto px-4 text-center text-sm text-cyan-400/50">
-          <p>© 2025 TestYourMouse.com • Hecho con ❤️ para gamers y entusiastas de la tecnología</p>
-        </div>
-      </footer>
+        {/* Footer */}
+        <footer className="border-t border-cyan-500/20 mt-16 py-8" role="contentinfo">
+          <div className="max-w-7xl mx-auto px-4 text-center text-sm text-cyan-400/50">
+            <p>© 2025 TestYourMouse.com • Hecho con ❤️ para gamers y entusiastas de la tecnología</p>
+          </div>
+        </footer>
 
-      {/* Buy Me a Coffee Button */}
-      <a
-        href="https://www.buymeacoffee.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 px-4 py-3 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-gray-900 rounded-full shadow-lg transition-all transform hover:scale-110 flex items-center gap-2 z-50 font-medium"
-      >
-        <Coffee className="w-5 h-5" />
-        <span className="hidden sm:inline">Buy Me a Coffee</span>
-      </a>
-    </div>
+        {/* Buy Me a Coffee Button */}
+        <a
+          href="https://www.buymeacoffee.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Cómprame un café - Apoya este proyecto"
+          className="fixed bottom-6 right-6 px-4 py-3 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-gray-900 rounded-full shadow-lg transition-all transform hover:scale-110 flex items-center gap-2 z-50 font-medium"
+        >
+          <Coffee className="w-5 h-5" aria-hidden="true" />
+          <span className="hidden sm:inline">Buy Me a Coffee</span>
+        </a>
+      </div>
+    </>
   );
 }

@@ -12,19 +12,22 @@ export function Home({ onNavigateToTool }: HomeProps) {
   return (
     <div className="max-w-5xl mx-auto space-y-12">
       {/* Hero Section */}
-      <div className="text-center space-y-6 py-8">
+      <section className="text-center space-y-6 py-8" aria-labelledby="hero-heading">
         <div className="flex justify-center mb-6">
           <div className="relative">
-            <Mouse className="w-20 h-20 text-cyan-400" />
-            <div className="absolute inset-0 w-20 h-20 text-cyan-400 animate-ping opacity-20">
+            <Mouse className="w-20 h-20 text-cyan-400" aria-hidden="true" />
+            <div className="absolute inset-0 w-20 h-20 text-cyan-400 animate-ping opacity-20" aria-hidden="true">
               <Mouse className="w-20 h-20" />
             </div>
           </div>
         </div>
 
         <div className="space-y-3">
-          <h1 className="text-4xl md:text-5xl">
-            <span className="text-cyan-400">&gt;_</span> TestYourMouse
+          <h1 id="hero-heading" className="text-4xl md:text-5xl">
+            <span className="text-cyan-400" aria-hidden="true">
+              &gt;_
+            </span>{" "}
+            TestYourMouse
           </h1>
           <p className="text-xl text-purple-400 font-mono tracking-wide">La suite profesional para testear tu ratón</p>
         </div>
@@ -34,24 +37,32 @@ export function Home({ onNavigateToTool }: HomeProps) {
           periférico más importante.
         </p>
 
-        <div className="flex flex-wrap justify-center gap-3 pt-4">
-          <Badge className="bg-cyan-500/10 text-cyan-400 border-cyan-500/50 font-mono px-4 py-1.5">100% GRATIS</Badge>
-          <Badge className="bg-purple-500/10 text-purple-400 border-purple-500/50 font-mono px-4 py-1.5">SIN REGISTRO</Badge>
-          <Badge className="bg-green-500/10 text-green-400 border-green-500/50 font-mono px-4 py-1.5">NAVEGADOR</Badge>
+        <div className="flex flex-wrap justify-center gap-3 pt-4" role="list" aria-label="Características principales">
+          <Badge className="bg-cyan-500/10 text-cyan-400 border-cyan-500/50 font-mono px-4 py-1.5" role="listitem">
+            100% GRATIS
+          </Badge>
+          <Badge className="bg-purple-500/10 text-purple-400 border-purple-500/50 font-mono px-4 py-1.5" role="listitem">
+            SIN REGISTRO
+          </Badge>
+          <Badge className="bg-green-500/10 text-green-400 border-green-500/50 font-mono px-4 py-1.5" role="listitem">
+            NAVEGADOR
+          </Badge>
         </div>
-      </div>
+      </section>
 
       {/* Why Test Your Mouse */}
-      <Card className="p-8 bg-gradient-to-br from-cyan-500/5 to-purple-500/5 border-cyan-500/30">
+      <Card className="p-8 bg-gradient-to-br from-cyan-500/5 to-purple-500/5 border-cyan-500/30" role="article" aria-labelledby="why-section">
         <div className="flex items-center gap-3 mb-6">
-          <Activity className="w-6 h-6 text-cyan-400" />
-          <h2 className="text-2xl text-cyan-400">[POR_QUÉ_TESTEAR_TU_RATÓN]</h2>
+          <Activity className="w-6 h-6 text-cyan-400" aria-hidden="true" />
+          <h2 id="why-section" className="text-2xl text-cyan-400">
+            [POR_QUÉ_TESTEAR_TU_RATÓN]
+          </h2>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6 text-gray-300">
           <div className="space-y-3">
             <div className="flex items-start gap-3">
-              <CheckCircle2 className="w-5 h-5 text-green-400 mt-1 flex-shrink-0" />
+              <CheckCircle2 className="w-5 h-5 text-green-400 mt-1 flex-shrink-0" aria-hidden="true" />
               <div>
                 <p className="text-cyan-400 font-mono text-sm mb-1">// Detecta problemas de hardware</p>
                 <p className="text-sm text-gray-400">Identifica fallos en clicks, doble click involuntario, o problemas con el sensor antes de que afecten tu rendimiento.</p>
@@ -59,7 +70,7 @@ export function Home({ onNavigateToTool }: HomeProps) {
             </div>
 
             <div className="flex items-start gap-3">
-              <CheckCircle2 className="w-5 h-5 text-green-400 mt-1 flex-shrink-0" />
+              <CheckCircle2 className="w-5 h-5 text-green-400 mt-1 flex-shrink-0" aria-hidden="true" />
               <div>
                 <p className="text-cyan-400 font-mono text-sm mb-1">// Optimiza tu configuración</p>
                 <p className="text-sm text-gray-400">Descubre tu DPI real, polling rate efectivo y ajusta la configuración perfecta para tu estilo de juego.</p>
@@ -69,7 +80,7 @@ export function Home({ onNavigateToTool }: HomeProps) {
 
           <div className="space-y-3">
             <div className="flex items-start gap-3">
-              <CheckCircle2 className="w-5 h-5 text-green-400 mt-1 flex-shrink-0" />
+              <CheckCircle2 className="w-5 h-5 text-green-400 mt-1 flex-shrink-0" aria-hidden="true" />
               <div>
                 <p className="text-cyan-400 font-mono text-sm mb-1">// Mejora tu rendimiento</p>
                 <p className="text-sm text-gray-400">Mide tu velocidad de clicks (CPS), tiempo de reacción y precisión para llevar tu gameplay al siguiente nivel.</p>
@@ -77,7 +88,7 @@ export function Home({ onNavigateToTool }: HomeProps) {
             </div>
 
             <div className="flex items-start gap-3">
-              <CheckCircle2 className="w-5 h-5 text-green-400 mt-1 flex-shrink-0" />
+              <CheckCircle2 className="w-5 h-5 text-green-400 mt-1 flex-shrink-0" aria-hidden="true" />
               <div>
                 <p className="text-cyan-400 font-mono text-sm mb-1">// Compara y compite</p>
                 <p className="text-sm text-gray-400">Benchmarkea tu ratón contra otros modelos y compite con la comunidad para alcanzar los mejores scores.</p>
