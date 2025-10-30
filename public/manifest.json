@@ -1,7 +1,7 @@
 {
   "name": "TestYourMouse",
   "short_name": "TestYourMouse",
-  "description": "Herramientas profesionales gratuitas para testear tu ratón",
+  "description": "Professional free tools to test your mouse",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0a0a0f",

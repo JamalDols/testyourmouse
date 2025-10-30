@@ -17,16 +17,16 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
 
         <div className="space-y-2">
           <h1 className="text-3xl font-mono text-red-400">[ERROR]</h1>
-          <p className="text-gray-400 font-mono text-sm">Algo salió mal. Por favor, intenta de nuevo.</p>
+          <p className="text-gray-400 font-mono text-sm">Something went wrong. Please try again.</p>
         </div>
 
         <div className="flex flex-col gap-3">
           <button onClick={reset} className="px-6 py-3 bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/50 hover:border-cyan-500 text-cyan-400 rounded-lg transition-all font-mono">
-            [REINTENTAR]
+            [RETRY]
           </button>
 
           <a href="/" className="px-6 py-3 bg-gray-500/20 hover:bg-gray-500/30 border border-gray-500/50 hover:border-gray-500 text-gray-400 hover:text-gray-300 rounded-lg transition-all font-mono">
-            [VOLVER_AL_INICIO]
+            [BACK_TO_HOME]
           </a>
         </div>
 

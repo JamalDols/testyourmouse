@@ -1,3 +1,6 @@
 {
-    "nuxt.isNuxtApp": false
+  "terminal.integrated.allowWorkspaceShell": true,
+  "terminal.integrated.experimentalBufferImpl": "legacy",
+  "terminal.integrated.shellIntegration.enabled": false,
+  "nuxt.isNuxtApp": false
 }

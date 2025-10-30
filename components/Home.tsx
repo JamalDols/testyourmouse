@@ -29,23 +29,23 @@ export function Home({ onNavigateToTool }: HomeProps) {
             </span>{" "}
             TestYourMouse
           </h1>
-          <p className="text-xl text-purple-400 font-mono tracking-wide">La suite profesional para testear tu ratón</p>
+          <p className="text-xl text-purple-400 font-mono tracking-wide">The professional suite to test your mouse</p>
         </div>
 
         <p className="text-gray-300 max-w-2xl mx-auto leading-relaxed">
-          Descubre el verdadero rendimiento de tu ratón con herramientas profesionales diseñadas para gamers competitivos y entusiastas del hardware. Mide, analiza y optimiza cada aspecto de tu
-          periférico más importante.
+          Discover your mouse's true performance with professional tools designed for competitive gamers and hardware enthusiasts. Measure, analyze, and optimize every aspect of your most important
+          peripheral.
         </p>
 
-        <div className="flex flex-wrap justify-center gap-3 pt-4" role="list" aria-label="Características principales">
+        <div className="flex flex-wrap justify-center gap-3 pt-4" role="list" aria-label="Main features">
           <Badge className="bg-cyan-500/10 text-cyan-400 border-cyan-500/50 font-mono px-4 py-1.5" role="listitem">
-            100% GRATIS
+            100% FREE
           </Badge>
           <Badge className="bg-purple-500/10 text-purple-400 border-purple-500/50 font-mono px-4 py-1.5" role="listitem">
-            SIN REGISTRO
+            NO REGISTRATION
           </Badge>
           <Badge className="bg-green-500/10 text-green-400 border-green-500/50 font-mono px-4 py-1.5" role="listitem">
-            NAVEGADOR
+            BROWSER
           </Badge>
         </div>
       </section>
@@ -55,7 +55,7 @@ export function Home({ onNavigateToTool }: HomeProps) {
         <div className="flex items-center gap-3 mb-6">
           <Activity className="w-6 h-6 text-cyan-400" aria-hidden="true" />
           <h2 id="why-section" className="text-2xl text-cyan-400">
-            [POR_QUÉ_TESTEAR_TU_RATÓN]
+            [WHY_TEST_YOUR_MOUSE]
           </h2>
         </div>
 
@@ -64,16 +64,16 @@ export function Home({ onNavigateToTool }: HomeProps) {
             <div className="flex items-start gap-3">
               <CheckCircle2 className="w-5 h-5 text-green-400 mt-1 flex-shrink-0" aria-hidden="true" />
               <div>
-                <p className="text-cyan-400 font-mono text-sm mb-1">// Detecta problemas de hardware</p>
-                <p className="text-sm text-gray-400">Identifica fallos en clicks, doble click involuntario, o problemas con el sensor antes de que afecten tu rendimiento.</p>
+                <p className="text-cyan-400 font-mono text-sm mb-1">// Detect hardware issues</p>
+                <p className="text-sm text-gray-400">Identify click failures, unintentional double clicking, or sensor problems before they affect your performance.</p>
               </div>
             </div>
 
             <div className="flex items-start gap-3">
               <CheckCircle2 className="w-5 h-5 text-green-400 mt-1 flex-shrink-0" aria-hidden="true" />
               <div>
-                <p className="text-cyan-400 font-mono text-sm mb-1">// Optimiza tu configuración</p>
-                <p className="text-sm text-gray-400">Descubre tu DPI real, polling rate efectivo y ajusta la configuración perfecta para tu estilo de juego.</p>
+                <p className="text-cyan-400 font-mono text-sm mb-1">// Optimize your configuration</p>
+                <p className="text-sm text-gray-400">Discover your real DPI, effective polling rate, and adjust the perfect configuration for your play style.</p>
               </div>
             </div>
           </div>
@@ -82,16 +82,16 @@ export function Home({ onNavigateToTool }: HomeProps) {
             <div className="flex items-start gap-3">
               <CheckCircle2 className="w-5 h-5 text-green-400 mt-1 flex-shrink-0" aria-hidden="true" />
               <div>
-                <p className="text-cyan-400 font-mono text-sm mb-1">// Mejora tu rendimiento</p>
-                <p className="text-sm text-gray-400">Mide tu velocidad de clicks (CPS), tiempo de reacción y precisión para llevar tu gameplay al siguiente nivel.</p>
+                <p className="text-cyan-400 font-mono text-sm mb-1">// Improve your performance</p>
+                <p className="text-sm text-gray-400">Measure your click speed (CPS), reaction time, and precision to take your gameplay to the next level.</p>
               </div>
             </div>
 
             <div className="flex items-start gap-3">
               <CheckCircle2 className="w-5 h-5 text-green-400 mt-1 flex-shrink-0" aria-hidden="true" />
               <div>
-                <p className="text-cyan-400 font-mono text-sm mb-1">// Compara y compite</p>
-                <p className="text-sm text-gray-400">Benchmarkea tu ratón contra otros modelos y compite con la comunidad para alcanzar los mejores scores.</p>
+                <p className="text-cyan-400 font-mono text-sm mb-1">// Compare and compete</p>
+                <p className="text-sm text-gray-400">Benchmark your mouse against other models and compete with the community to achieve the best scores.</p>
               </div>
             </div>
           </div>
@@ -102,7 +102,7 @@ export function Home({ onNavigateToTool }: HomeProps) {
       <div className="space-y-6">
         <div className="flex items-center gap-3">
           <Sparkles className="w-6 h-6 text-cyan-400" />
-          <h2 className="text-2xl text-cyan-400">[HERRAMIENTAS_GRATUITAS]</h2>
+          <h2 className="text-2xl text-cyan-400">[FREE_TOOLS]</h2>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -113,7 +113,7 @@ export function Home({ onNavigateToTool }: HomeProps) {
               </div>
               <h3 className="text-cyan-400 font-mono">Click Visualizer</h3>
             </div>
-            <p className="text-sm text-gray-400">Visualiza todos tus clicks en tiempo real. Detecta doble clicks involuntarios y patrones de uso.</p>
+            <p className="text-sm text-gray-400">Visualize all your clicks in real-time. Detect unintentional double clicks and usage patterns.</p>
           </Card>
 
           <Card className="p-6 bg-[#12121a] border-cyan-500/30 hover:border-cyan-500/50 transition-all hover:glow-cyan group cursor-pointer" onClick={() => onNavigateToTool("double-click")}>
@@ -123,7 +123,7 @@ export function Home({ onNavigateToTool }: HomeProps) {
               </div>
               <h3 className="text-cyan-400 font-mono">Double Click Test</h3>
             </div>
-            <p className="text-sm text-gray-400">Testea la estabilidad de tus clicks. Identifica si tu ratón sufre de doble click no deseado.</p>
+            <p className="text-sm text-gray-400">Test your click stability. Identify if your mouse suffers from unwanted double clicking.</p>
           </Card>
 
           <Card className="p-6 bg-[#12121a] border-cyan-500/30 hover:border-cyan-500/50 transition-all hover:glow-cyan group cursor-pointer" onClick={() => onNavigateToTool("cps-test")}>
@@ -133,7 +133,7 @@ export function Home({ onNavigateToTool }: HomeProps) {
               </div>
               <h3 className="text-cyan-400 font-mono">CPS Test</h3>
             </div>
-            <p className="text-sm text-gray-400">Mide tu velocidad de clicks por segundo. Perfecto para gamers que necesitan clicks rápidos.</p>
+            <p className="text-sm text-gray-400">Measure your clicks per second speed. Perfect for gamers who need fast clicking.</p>
           </Card>
 
           <Card className="p-6 bg-[#12121a] border-cyan-500/30 hover:border-cyan-500/50 transition-all hover:glow-cyan group cursor-pointer" onClick={() => onNavigateToTool("scroll-test")}>
@@ -143,7 +143,7 @@ export function Home({ onNavigateToTool }: HomeProps) {
               </div>
               <h3 className="text-cyan-400 font-mono">Scroll Test</h3>
             </div>
-            <p className="text-sm text-gray-400">Evalúa la precisión y suavidad de tu rueda de scroll con métricas detalladas.</p>
+            <p className="text-sm text-gray-400">Evaluate your scroll wheel's precision and smoothness with detailed metrics.</p>
           </Card>
 
           <Card className="p-6 bg-[#12121a] border-cyan-500/30 hover:border-cyan-500/50 transition-all hover:glow-cyan group cursor-pointer" onClick={() => onNavigateToTool("tracking-jitter")}>
@@ -153,7 +153,7 @@ export function Home({ onNavigateToTool }: HomeProps) {
               </div>
               <h3 className="text-cyan-400 font-mono">Tracking & Jitter</h3>
             </div>
-            <p className="text-sm text-gray-400">Analiza la precisión del sensor y detecta jitter o aceleración no deseada.</p>
+            <p className="text-sm text-gray-400">Analyze sensor precision and detect unwanted jitter or acceleration.</p>
           </Card>
 
           <Card
@@ -165,9 +165,9 @@ export function Home({ onNavigateToTool }: HomeProps) {
                 <Lock className="w-5 h-5 text-purple-400" />
               </div>
               <h3 className="text-purple-400 font-mono">Pro Tools</h3>
-              <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/50 font-mono text-xs">€5</Badge>
+              <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/50 font-mono text-xs">$5</Badge>
             </div>
-            <p className="text-sm text-gray-400">Herramientas profesionales avanzadas: Reaction Time, Sensor Analysis, Response Graph y más.</p>
+            <p className="text-sm text-gray-400">Advanced professional tools: Reaction Time, Sensor Analysis, Response Graph and more.</p>
           </Card>
         </div>
       </div>
@@ -175,14 +175,12 @@ export function Home({ onNavigateToTool }: HomeProps) {
       {/* CTA Section */}
       <Card className="p-8 text-center bg-gradient-to-br from-cyan-500/10 to-purple-500/10 border-2 border-cyan-500/50 glow-cyan">
         <h2 className="text-2xl mb-3 text-cyan-400">[READY_TO_START]</h2>
-        <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-          Todas las herramientas están listas para usar. No necesitas registrarte ni descargar nada. Simplemente selecciona una herramienta de arriba y comienza a testear.
-        </p>
+        <p className="text-gray-300 mb-6 max-w-2xl mx-auto">All tools are ready to use. You don't need to register or download anything. Just select a tool above and start testing.</p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <div className="flex items-center gap-2 text-sm text-gray-400 font-mono">
             <ArrowRight className="w-4 h-4 text-cyan-400" />
-            <span>Selecciona una pestaña arriba para empezar</span>
+            <span>Select a tab above to get started</span>
           </div>
         </div>
 
@@ -197,8 +195,8 @@ export function Home({ onNavigateToTool }: HomeProps) {
           <div className="w-12 h-12 bg-cyan-500/10 rounded-lg border border-cyan-500/30 flex items-center justify-center mx-auto mb-4">
             <Gauge className="w-6 h-6 text-cyan-400" />
           </div>
-          <h3 className="text-cyan-400 font-mono mb-2">Gamers Competitivos</h3>
-          <p className="text-sm text-gray-400">Optimiza tu equipo y asegúrate de que tu hardware no te limite en partidas cruciales.</p>
+          <h3 className="text-cyan-400 font-mono mb-2">Competitive Gamers</h3>
+          <p className="text-sm text-gray-400">Optimize your setup and ensure your hardware doesn't limit you in crucial matches.</p>
         </Card>
 
         <Card className="p-6 bg-[#12121a] border-cyan-500/30 text-center">
@@ -206,7 +204,7 @@ export function Home({ onNavigateToTool }: HomeProps) {
             <Target className="w-6 h-6 text-purple-400" />
           </div>
           <h3 className="text-purple-400 font-mono mb-2">Tech Enthusiasts</h3>
-          <p className="text-sm text-gray-400">Analiza y compara el rendimiento real de diferentes ratones antes de tu próxima compra.</p>
+          <p className="text-sm text-gray-400">Analyze and compare the real performance of different mice before your next purchase.</p>
         </Card>
 
         <Card className="p-6 bg-[#12121a] border-cyan-500/30 text-center">
@@ -214,7 +212,7 @@ export function Home({ onNavigateToTool }: HomeProps) {
             <Activity className="w-6 h-6 text-green-400" />
           </div>
           <h3 className="text-green-400 font-mono mb-2">Hardware Reviewers</h3>
-          <p className="text-sm text-gray-400">Herramientas profesionales para crear reviews detallados con datos objetivos y medibles.</p>
+          <p className="text-sm text-gray-400">Professional tools to create detailed reviews with objective and measurable data.</p>
         </Card>
       </div>
     </div>

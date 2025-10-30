@@ -27,29 +27,29 @@ export default function Page() {
         "@id": "https://testyourmouse.com/#website",
         url: "https://testyourmouse.com",
         name: "TestYourMouse",
-        description: "Herramientas profesionales gratuitas para testear tu ratón",
-        inLanguage: "es-ES",
+        description: "Professional free tools to test your mouse",
+        inLanguage: "en-US",
       },
       {
         "@type": "WebApplication",
         "@id": "https://testyourmouse.com/#webapp",
         url: "https://testyourmouse.com",
         name: "TestYourMouse",
-        description: "Suite profesional de herramientas para testear ratones gaming",
+        description: "Professional suite of gaming mouse testing tools",
         applicationCategory: "UtilitiesApplication",
         operatingSystem: "Web Browser",
         offers: {
           "@type": "Offer",
           price: "0",
-          priceCurrency: "EUR",
+          priceCurrency: "USD",
         },
         featureList: [
-          "CPS Test - Test de velocidad de clicks",
-          "Double Click Test - Detector de doble click",
-          "Click Visualizer - Visualizador de clicks",
-          "Scroll Test - Analizador de scroll",
-          "Tracking & Jitter - Test de precisión",
-          "Pro Tools - Herramientas profesionales",
+          "CPS Test - Click speed test",
+          "Double Click Test - Double click detector",
+          "Click Visualizer - Click visualizer",
+          "Scroll Test - Scroll analyzer",
+          "Tracking & Jitter - Precision test",
+          "Pro Tools - Professional tools",
         ],
       },
       {
@@ -58,26 +58,26 @@ export default function Page() {
         mainEntity: [
           {
             "@type": "Question",
-            name: "¿Qué es TestYourMouse?",
+            name: "What is TestYourMouse?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "TestYourMouse es una suite profesional de herramientas gratuitas diseñada para testear todos los aspectos de tu ratón gaming: velocidad de clicks (CPS), doble click, precisión, tracking, jitter y más.",
+              text: "TestYourMouse is a professional suite of free tools designed to test all aspects of your gaming mouse: click speed (CPS), double clicking, precision, tracking, jitter and more.",
             },
           },
           {
             "@type": "Question",
-            name: "¿Es gratis usar TestYourMouse?",
+            name: "Is TestYourMouse free to use?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Sí, todas las herramientas básicas son 100% gratuitas y no requieren registro.",
+              text: "Yes, all basic tools are 100% free and require no registration.",
             },
           },
           {
             "@type": "Question",
-            name: "¿Qué es un CPS Test?",
+            name: "What is a CPS Test?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "CPS significa Clicks Per Second (Clicks por Segundo). Es una medida de qué tan rápido puedes hacer click con tu ratón. Un buen CPS para gaming está entre 5-10 clicks por segundo.",
+              text: "CPS stands for Clicks Per Second. It measures how fast you can click with your mouse. A good CPS for gaming is between 5-10 clicks per second.",
             },
           },
         ],
@@ -96,34 +96,34 @@ export default function Page() {
               <Mouse className="w-8 h-8 text-cyan-400" aria-hidden="true" />
               <h1 className="text-3xl font-medium tracking-wider text-cyan-400">TestYourMouse</h1>
             </div>
-            <p className="text-cyan-400/70 text-sm">Testea tu ratón como un pro</p>
+            <p className="text-cyan-400/70 text-sm">Test your mouse like a pro</p>
           </div>
         </header>
 
         {/* Main Content */}
         <main className="max-w-7xl mx-auto px-4 py-8" role="main">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="w-full justify-start mb-8 bg-cyan-500/10 border border-cyan-500/30 p-1 flex-wrap h-auto" role="tablist" aria-label="Herramientas de testeo de ratón">
-              <TabsTrigger value="home" className="flex-1 min-w-[140px]" aria-label="Página de inicio">
+            <TabsList className="w-full justify-start mb-8 bg-cyan-500/10 border border-cyan-500/30 p-1 flex-wrap h-auto" role="tablist" aria-label="Mouse testing tools">
+              <TabsTrigger value="home" className="flex-1 min-w-[140px]" aria-label="Home page">
                 <HomeIcon className="w-4 h-4 mr-2" aria-hidden="true" />
                 Home
               </TabsTrigger>
-              <TabsTrigger value="click-visualizer" className="flex-1 min-w-[140px]" aria-label="Visualizador de clicks">
+              <TabsTrigger value="click-visualizer" className="flex-1 min-w-[140px]" aria-label="Click visualizer">
                 Click Visualizer
               </TabsTrigger>
-              <TabsTrigger value="double-click" className="flex-1 min-w-[140px]" aria-label="Test de doble click">
+              <TabsTrigger value="double-click" className="flex-1 min-w-[140px]" aria-label="Double click test">
                 Double Click Test
               </TabsTrigger>
-              <TabsTrigger value="cps-test" className="flex-1 min-w-[140px]" aria-label="Test de velocidad de clicks por segundo">
+              <TabsTrigger value="cps-test" className="flex-1 min-w-[140px]" aria-label="Clicks per second speed test">
                 CPS Test
               </TabsTrigger>
-              <TabsTrigger value="scroll-test" className="flex-1 min-w-[140px]" aria-label="Test de scroll del ratón">
+              <TabsTrigger value="scroll-test" className="flex-1 min-w-[140px]" aria-label="Mouse scroll test">
                 Scroll Test
               </TabsTrigger>
-              <TabsTrigger value="tracking-jitter" className="flex-1 min-w-[140px]" aria-label="Test de tracking y jitter">
+              <TabsTrigger value="tracking-jitter" className="flex-1 min-w-[140px]" aria-label="Tracking and jitter test">
                 Tracking & Jitter
               </TabsTrigger>
-              <TabsTrigger value="pro-tools" className="flex-1 min-w-[140px] relative" aria-label="Herramientas profesionales">
+              <TabsTrigger value="pro-tools" className="flex-1 min-w-[140px] relative" aria-label="Professional tools">
                 Pro Tools
                 <span className="absolute -top-1 -right-1 w-2 h-2 bg-purple-500 rounded-full animate-pulse" aria-hidden="true" />
               </TabsTrigger>
@@ -162,7 +162,7 @@ export default function Page() {
         {/* Footer */}
         <footer className="border-t border-cyan-500/20 mt-16 py-8" role="contentinfo">
           <div className="max-w-7xl mx-auto px-4 text-center text-sm text-cyan-400/50">
-            <p>© 2025 TestYourMouse.com • Hecho con ❤️ para gamers y entusiastas de la tecnología</p>
+            <p>© 2025 TestYourMouse.com • Made with ❤️ for gamers and tech enthusiasts</p>
           </div>
         </footer>
 
@@ -171,7 +171,7 @@ export default function Page() {
           href="https://www.buymeacoffee.com"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Cómprame un café - Apoya este proyecto"
+          aria-label="Buy me a coffee - Support this project"
           className="fixed bottom-6 right-6 px-4 py-3 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-gray-900 rounded-full shadow-lg transition-all transform hover:scale-110 flex items-center gap-2 z-50 font-medium"
         >
           <Coffee className="w-5 h-5" aria-hidden="true" />

@@ -39,3 +39,4 @@ next-env.d.ts
 # old files
 package-old.json
 vite.config.ts
+.vscode/settings.json
