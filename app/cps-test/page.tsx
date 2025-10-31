@@ -12,6 +12,15 @@ export const metadata: Metadata = {
     title: "CPS Test - Measure Your Clicking Speed",
     description: "Test your clicks per second (CPS) for gaming. Free online tool.",
     url: "https://testyourmouse.com/cps-test",
+    type: "website",
+    images: [
+      {
+        url: "https://testyourmouse.com/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "TestYourMouse - CPS Test",
+      },
+    ],
   },
 };
 

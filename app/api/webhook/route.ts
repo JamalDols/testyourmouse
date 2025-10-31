@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
 import { stripeConfig } from "@/lib/stripe-config";
+import { resend, emailConfig } from "@/lib/resend";
+import { PaymentConfirmationEmail, getPaymentConfirmationText } from "@/emails/PaymentConfirmationEmail";
 import Stripe from "stripe";
 
 export async function POST(req: NextRequest) {
@@ -33,18 +35,70 @@ export async function POST(req: NextRequest) {
       case "checkout.session.completed": {
         const session = event.data.object as Stripe.Checkout.Session;
 
-        console.log("✅ Payment successful:", {
-          sessionId: session.id,
-          email: session.customer_email,
-          amount: session.amount_total,
-          currency: session.currency,
-        });
+        console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+        console.log("✅ PAYMENT SUCCESSFUL");
+        console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+        console.log("Session ID:", session.id);
+        console.log("Customer Email:", session.customer_email);
+        console.log("Amount:", session.amount_total, session.currency);
+        console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 
-        // Here you could:
-        // 1. Save to database
-        // 2. Send confirmation email
-        // 3. Generate unlock code
-        // For now, we just log it
+        // Send confirmation email
+        if (session.customer_email && session.amount_total) {
+          console.log("📧 Attempting to send email...");
+          console.log("   From:", emailConfig.from);
+          console.log("   To:", session.customer_email);
+          console.log("   Reply-To:", emailConfig.replyTo);
+
+          // Check if Resend API key is configured
+          if (!process.env.RESEND_API_KEY) {
+            console.error("❌ ERROR: RESEND_API_KEY is not configured!");
+            console.error("   Please add RESEND_API_KEY to your .env.local file");
+          } else {
+            console.log("✓ Resend API Key is configured");
+
+            try {
+              const result = await resend.emails.send({
+                from: emailConfig.from,
+                replyTo: emailConfig.replyTo,
+                to: session.customer_email,
+                subject: "🎉 Welcome to TestYourMouse Pro!",
+                html: PaymentConfirmationEmail({
+                  customerEmail: session.customer_email,
+                  amount: session.amount_total,
+                  currency: session.currency || "usd",
+                  sessionId: session.id,
+                }),
+                text: getPaymentConfirmationText({
+                  customerEmail: session.customer_email,
+                  amount: session.amount_total,
+                  currency: session.currency || "usd",
+                  sessionId: session.id,
+                }),
+              });
+
+              console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+              console.log("✅ EMAIL SENT SUCCESSFULLY!");
+              console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+              console.log("Email ID:", result.data?.id);
+              console.log("Result:", JSON.stringify(result, null, 2));
+              console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            } catch (emailError: any) {
+              console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+              console.error("❌ EMAIL SENDING FAILED!");
+              console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+              console.error("Error Type:", emailError.constructor.name);
+              console.error("Error Message:", emailError.message);
+              console.error("Error Details:", JSON.stringify(emailError, null, 2));
+              console.error("Full Error:", emailError);
+              console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            }
+          }
+        } else {
+          console.log("⚠️  Skipping email: Missing email or amount");
+          console.log("   Email present:", !!session.customer_email);
+          console.log("   Amount present:", !!session.amount_total);
+        }
 
         break;
       }

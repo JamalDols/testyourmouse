@@ -12,6 +12,15 @@ export const metadata: Metadata = {
     title: "Click Visualizer - Test Your Mouse Clicks",
     description: "Visualize and analyze your mouse clicks in real-time. Free online tool.",
     url: "https://testyourmouse.com/click-visualizer",
+    type: "website",
+    images: [
+      {
+        url: "https://testyourmouse.com/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "TestYourMouse - Click Visualizer",
+      },
+    ],
   },
 };
 

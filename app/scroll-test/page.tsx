@@ -12,6 +12,15 @@ export const metadata: Metadata = {
     title: "Scroll Test - Test Your Mouse Wheel",
     description: "Evaluate scroll wheel precision and smoothness with detailed metrics.",
     url: "https://testyourmouse.com/scroll-test",
+    type: "website",
+    images: [
+      {
+        url: "https://testyourmouse.com/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "TestYourMouse - Scroll Test",
+      },
+    ],
   },
 };
 

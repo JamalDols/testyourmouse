@@ -12,6 +12,15 @@ export const metadata: Metadata = {
     title: "Double Click Test - Mouse Stability Checker",
     description: "Test if your mouse suffers from unwanted double clicking. Free tool.",
     url: "https://testyourmouse.com/double-click",
+    type: "website",
+    images: [
+      {
+        url: "https://testyourmouse.com/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "TestYourMouse - Double Click Test",
+      },
+    ],
   },
 };
 

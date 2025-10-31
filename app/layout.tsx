@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     siteName: "TestYourMouse",
     images: [
       {
-        url: "/og-image.png",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "TestYourMouse - Professional tools to test your mouse",
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "TestYourMouse - Test your mouse like a pro",
     description: "Professional free tools to test your mouse: CPS Test, Double Click Test, Tracking & Jitter and more.",
-    images: ["/og-image.png"],
+    images: ["/opengraph-image"],
     creator: "@testyourmouse",
   },
   robots: {

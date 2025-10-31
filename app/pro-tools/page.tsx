@@ -12,6 +12,15 @@ export const metadata: Metadata = {
     title: "Pro Tools - Advanced Mouse Testing",
     description: "Professional features for advanced mouse testing and analysis.",
     url: "https://testyourmouse.com/pro-tools",
+    type: "website",
+    images: [
+      {
+        url: "https://testyourmouse.com/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "TestYourMouse - Pro Tools",
+      },
+    ],
   },
 };
 

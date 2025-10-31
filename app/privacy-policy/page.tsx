@@ -5,6 +5,23 @@ import { Shield, Cookie, Eye, Lock, Mail, Calendar } from "lucide-react";
 export const metadata: Metadata = {
   title: "Privacy Policy - TestYourMouse",
   description: "Learn about how TestYourMouse collects, uses, and protects your personal information and data.",
+  alternates: {
+    canonical: "https://testyourmouse.com/privacy-policy",
+  },
+  openGraph: {
+    title: "Privacy Policy - TestYourMouse",
+    description: "Learn about how TestYourMouse collects, uses, and protects your personal information and data.",
+    url: "https://testyourmouse.com/privacy-policy",
+    type: "website",
+    images: [
+      {
+        url: "https://testyourmouse.com/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "TestYourMouse - Privacy Policy",
+      },
+    ],
+  },
   robots: {
     index: true,
     follow: true,

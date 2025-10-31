@@ -12,6 +12,15 @@ export const metadata: Metadata = {
     title: "Tracking & Jitter Test - Sensor Precision Analyzer",
     description: "Test your mouse sensor precision and detect jitter issues.",
     url: "https://testyourmouse.com/tracking-jitter",
+    type: "website",
+    images: [
+      {
+        url: "https://testyourmouse.com/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "TestYourMouse - Tracking & Jitter Test",
+      },
+    ],
   },
 };
 
