@@ -15,8 +15,15 @@ declare global {
 
 export function CookieConsent() {
   const [isVisible, setIsVisible] = useState(false);
+  const isProduction = process.env.NODE_ENV === "production";
 
   useEffect(() => {
+    // Solo inicializar GTM en producción
+    if (!isProduction) {
+      console.log("🚫 GTM disabled in development mode");
+      return;
+    }
+
     // Initialize dataLayer and gtag function
     window.dataLayer = window.dataLayer || [];
     window.gtag = function gtag() {
@@ -50,7 +57,7 @@ export function CookieConsent() {
       // User previously rejected - update consent to denied
       updateConsent("denied");
     }
-  }, []);
+  }, [isProduction]);
 
   const updateConsent = (value: "granted" | "denied") => {
     window.gtag("consent", "update", {

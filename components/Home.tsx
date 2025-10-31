@@ -5,8 +5,10 @@ import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { Mouse, Zap, Target, MousePointer2, Activity, Gauge, Lock, ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
 import { trackToolAccess } from "@/lib/analytics";
+import { usePrice } from "@/hooks/usePrice";
 
 export function Home() {
+  const { price, mounted } = usePrice();
   return (
     <div className="max-w-5xl mx-auto space-y-12">
       {/* Hero Section */}
@@ -171,7 +173,7 @@ export function Home() {
                   <Lock className="w-5 h-5 text-purple-400" />
                 </div>
                 <h3 className="text-purple-400 font-mono">Pro Tools</h3>
-                <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/50 font-mono text-xs">$5</Badge>
+                <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/50 font-mono text-xs">{mounted ? price.formatted : "$4.99"}</Badge>
               </div>
               <p className="text-sm text-gray-400">Advanced professional tools: Reaction Time, Sensor Analysis, Response Graph and more.</p>
             </Card>
@@ -192,7 +194,7 @@ export function Home() {
         </div>
 
         <div className="mt-8 pt-8 border-t border-cyan-500/20">
-          <p className="text-xs text-gray-500 font-mono">OPEN_SOURCE • NO_ADS • PRIVACY_FIRST • MADE_FOR_GAMERS</p>
+          <p className="text-xs text-gray-500 font-mono">NO_ADS • PRIVACY_FIRST • MADE_FOR_GAMERS</p>
         </div>
       </Card>
 

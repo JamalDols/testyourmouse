@@ -3,48 +3,22 @@ import { MetadataRoute } from "next";
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://testyourmouse.com";
 
-  return [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/#click-visualizer`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/#double-click`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/#cps-test`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/#scroll-test`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/#tracking-jitter`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/#pro-tools`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
+  // Lista de todas las rutas con sus prioridades
+  const routes = [
+    { path: "", priority: 1.0 },
+    { path: "/click-visualizer", priority: 0.8 },
+    { path: "/double-click", priority: 0.8 },
+    { path: "/cps-test", priority: 0.9 },
+    { path: "/scroll-test", priority: 0.8 },
+    { path: "/tracking-jitter", priority: 0.8 },
+    { path: "/pro-tools", priority: 0.7 },
+    { path: "/privacy-policy", priority: 0.3 },
   ];
+
+  return routes.map((route) => ({
+    url: `${baseUrl}${route.path}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: route.priority,
+  }));
 }

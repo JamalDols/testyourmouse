@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.testyourmouse.com"
+        }
+      ],
+      "destination": "https://testyourmouse.com/:path*",
+      "permanent": true
+    }
+  ]
+}

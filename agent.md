@@ -78,10 +78,10 @@ Herramientas gratuitas + Pro Tools mediante Stripe + Donaciones.
 
 ## 💰 Monetización
 
-- [ ] Integrar Stripe (pago único por acceso a Pro Tools)
-- [ ] Crear producto en Stripe Dashboard
-- [ ] Webhook opcional (si se usa login más adelante)
+- [x] Integrar Stripe (pago único por acceso a Pro Tools)
+- [x] Crear producto en Stripe Dashboard
 - [ ] Añadir Buy Me a Coffee (iframe o botón)
+- [ ] Poner stripe en producción
 
 ---
 
@@ -90,26 +90,12 @@ Herramientas gratuitas + Pro Tools mediante Stripe + Donaciones.
 - [ ] Animaciones con `framer-motion`
 - [ ] Responsive completo
 - [ ] SEO básico (`next/head`, OG tags, título dinámico, OG Dinámicas)
-- [ ] Despliegue en Vercel + dominio `testyourmouse.com`
-- [ ] Analíticas básicas (Google Analytics o similar)
+- [x] Despliegue en Vercel + dominio `testyourmouse.com`
+- [x] Analíticas básicas (Google Analytics o similar)
+- [x] Cambiar el precio a $4.99 en toda la web
+- [x] Configurar ESLint + Prettier
 - [ ] Pruebas unitarias con `Jest` y `React Testing Library`
-- [ ] Configurar ESLint + Prettier
 - [ ] Añadir alguna herramienta de feedback
-
----
-
-## 🧠 Notas
-
-- Todo debe funcionar **sin login** al principio
-- Guardar histórico en `localStorage`
-- Interfaz limpia, accesible y minimal
-- Uso de `useEffect` para detección de eventos (`mousedown`, `mouseup`, `mousemove`, `wheel`, etc.)
-
----
-
-## ✅ Estado actual
-
-- [x] Proyecto creado
-- [x] Layout funcional
-- [x] Tabs en marcha
-- [ ] Primer test implementado
+- [ ] Las notificaciones tienen que tener fondo
+- [ ] Revisar que llega el mail cuando pagas
+- [ ] En el CPS_ANALYZER mejorar el comportamiento

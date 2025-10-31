@@ -115,7 +115,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               {/* Navigation */}
               <nav className="border-t border-cyan-500/20" role="navigation" aria-label="Main navigation">
                 <div className="max-w-7xl mx-auto px-4">
-                  <ul className="flex flex-wrap gap-2 py-3">
+                  <ul className="flex flex-wrap gap-2 py-3 justify-center">
                     <li>
                       <NavLink href="/">Home</NavLink>
                     </li>

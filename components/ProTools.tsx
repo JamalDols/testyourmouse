@@ -1,5 +1,7 @@
 "use client";
 
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { Lock, Zap, Target, Gauge, TrendingUp, Award, Unlock, CheckCircle2 } from "lucide-react";
@@ -9,21 +11,54 @@ import { ReactionTimeTest } from "./pro/ReactionTimeTest";
 import { PixelPerfectTest } from "./pro/PixelPerfectTest";
 import { SensorAnalysis } from "./pro/SensorAnalysis";
 import { ResponseTimeGraph } from "./pro/ResponseTimeGraph";
+import { ProUnlockModal } from "./ProUnlockModal";
 import { toast } from "sonner";
-import { trackProPaymentIntent } from "@/lib/analytics";
+import { usePrice } from "@/hooks/usePrice";
 
 export function ProTools() {
   const { isProUnlocked, unlockPro } = useProContext();
+  const [showModal, setShowModal] = useState(false);
+  const searchParams = useSearchParams();
+  const { price, mounted } = usePrice();
 
-  const handleUnlock = () => {
-    // Track payment intent
-    trackProPaymentIntent();
+  // Calcular el precio original (redondeado a .99)
+  const originalAmount = Math.ceil(price.amount * 2) - 0.01;
+  const originalPrice = mounted
+    ? new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: price.currency,
+      }).format(originalAmount)
+    : "$9.99";
 
-    unlockPro();
-    toast.success("[PRO_UNLOCKED]", {
-      description: "All professional tools are now available!",
-      duration: 3000,
-    });
+  // Handle payment success/cancel from URL params
+  useEffect(() => {
+    const success = searchParams.get("success");
+    const canceled = searchParams.get("canceled");
+    const sessionId = searchParams.get("session_id");
+
+    if (success === "true" && sessionId) {
+      // Payment successful!
+      unlockPro();
+      toast.success("🎉 Payment Successful!", {
+        description: "Pro Tools are now unlocked! Enjoy your professional features.",
+        duration: 5000,
+      });
+
+      // Clean URL
+      window.history.replaceState({}, "", "/pro-tools");
+    } else if (canceled === "true") {
+      toast.error("Payment Canceled", {
+        description: "You can try again whenever you're ready.",
+        duration: 4000,
+      });
+
+      // Clean URL
+      window.history.replaceState({}, "", "/pro-tools");
+    }
+  }, [searchParams, unlockPro]);
+
+  const handleUnlockClick = () => {
+    setShowModal(true);
   };
 
   const handleReset = () => {
@@ -129,49 +164,49 @@ export function ProTools() {
         {/* Sales Copy */}
         <div className="max-w-2xl mx-auto mb-8 text-left space-y-4">
           <p className="text-gray-300 text-sm leading-relaxed font-mono">
-            <span className="text-cyan-400">&gt;</span> ¿Eres un <span className="text-cyan-400">gamer competitivo</span> o un <span className="text-purple-400">entusiasta del hardware</span>? Lleva
-            tu análisis al siguiente nivel con nuestras herramientas profesionales.
+            <span className="text-cyan-400">&gt;</span> Are you a <span className="text-cyan-400">competitive gamer</span> or a <span className="text-purple-400">hardware enthusiast</span>? Take your
+            analysis to the next level with our professional tools.
           </p>
 
           <div className="bg-[#12121a] border border-cyan-500/20 rounded-lg p-4">
             <div className="grid md:grid-cols-2 gap-3 text-xs font-mono text-gray-400">
               <div className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
-                <span>Análisis avanzado de sensor y DPI</span>
+                <span>Advanced sensor and DPI analysis</span>
               </div>
               <div className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
-                <span>Detección de polling rate real</span>
+                <span>Real polling rate detection</span>
               </div>
               <div className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
-                <span>Test de tiempo de reacción profesional</span>
+                <span>Professional reaction time test</span>
               </div>
               <div className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
-                <span>Gráficos de latencia en tiempo real</span>
+                <span>Real-time latency graphs</span>
               </div>
               <div className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
-                <span>Test de precisión pixel-perfect</span>
+                <span>Pixel-perfect precision test</span>
               </div>
               <div className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
-                <span>Exportación de datos y estadísticas</span>
+                <span>Data export and statistics</span>
               </div>
             </div>
           </div>
 
           <p className="text-gray-300 text-sm leading-relaxed font-mono">
-            <span className="text-cyan-400">&gt;</span> Únete a miles de gamers y profesionales que ya confían en TestYourMouse PRO para
-            <span className="text-purple-400"> optimizar su setup</span> y dominar su rendimiento.
+            <span className="text-cyan-400">&gt;</span> Join thousands of gamers and professionals who already trust TestYourMouse PRO to
+            <span className="text-purple-400"> optimize their setup</span> and master their performance.
           </p>
         </div>
 
         <div className="flex items-center justify-center gap-4 mb-6">
           <div className="text-left">
-            <p className="text-sm text-gray-500 line-through font-mono">€10.00</p>
-            <p className="text-4xl text-cyan-400 font-mono">€5.00</p>
+            <p className="text-sm text-gray-500 line-through font-mono">{originalPrice}</p>
+            <p className="text-4xl text-cyan-400 font-mono">{mounted ? price.formatted : "$4.99"}</p>
           </div>
           <div className="text-left">
             <p className="text-sm text-gray-400 font-mono tracking-wider">LAUNCH_OFFER</p>
@@ -182,7 +217,7 @@ export function ProTools() {
         </div>
 
         <button
-          onClick={handleUnlock}
+          onClick={handleUnlockClick}
           className="w-full max-w-md mx-auto px-8 py-4 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 hover:from-cyan-500/30 hover:to-purple-500/30 border-2 border-purple-500/50 hover:border-purple-500 text-purple-400 rounded-lg transition-all transform hover:scale-105 glow-purple font-mono tracking-wider flex items-center justify-center gap-2"
         >
           <Unlock className="w-5 h-5" />
@@ -212,10 +247,13 @@ export function ProTools() {
         ))}
       </div>
 
+      {/* Pro Unlock Modal */}
+      <ProUnlockModal open={showModal} onOpenChange={setShowModal} />
+
       <Card className="p-6 mt-8 text-center bg-[#12121a] border-cyan-500/30">
         <Award className="w-8 h-8 text-cyan-400 mx-auto mb-3" />
         <p className="text-sm text-gray-300 font-mono mb-4">
-          <span className="text-cyan-400">100% satisfacción garantizada</span> • Si no estás satisfecho, te devolvemos tu dinero en 30 días
+          <span className="text-cyan-400">100% satisfaction guaranteed</span> • If you're not satisfied, we'll refund your money within 30 days
         </p>
         <p className="text-xs text-gray-400 font-mono">
           NEED_HELP?
