@@ -8,6 +8,7 @@ import { CookieConsent } from "@/components/CookieConsent";
 import { NavLink } from "@/components/NavLink";
 import { DonationButton } from "@/components/DonationButton";
 import { Mouse } from "lucide-react";
+import { Analytics } from "@vercel/analytics/next";
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -164,6 +165,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
           <Toaster />
         </ProProvider>
+        <Analytics />
       </body>
     </html>
   );
