@@ -25,15 +25,5 @@ export const metadata: Metadata = {
 };
 
 export default function ProToolsPage() {
-  const mask = (val: string | undefined) => (val ? `${val.substring(0, 20)}...` : "NOT_SET");
-
-  const debugInfo = {
-    webhookSecret: mask(process.env.STRIPE_WEBHOOK_SECRET),
-    priceId: mask(process.env.STRIPE_PRICE_ID),
-    secretKey: mask(process.env.STRIPE_SECRET_KEY),
-    productId: mask(process.env.STRIPE_PRODUCT_ID),
-    publishableKey: mask(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY),
-  };
-
-  return <ProTools debugInfo={debugInfo} />;
+  return <ProTools />;
 }

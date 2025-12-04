@@ -15,17 +15,7 @@ import { ProUnlockModal } from "./ProUnlockModal";
 import { toast } from "sonner";
 import { usePrice } from "@/hooks/usePrice";
 
-interface ProToolsProps {
-  debugInfo?: {
-    webhookSecret: string;
-    priceId: string;
-    secretKey: string;
-    productId: string;
-    publishableKey: string;
-  };
-}
-
-export function ProTools({ debugInfo }: ProToolsProps) {
+export function ProTools() {
   const { isProUnlocked, unlockPro } = useProContext();
   const [showModal, setShowModal] = useState(false);
   const searchParams = useSearchParams();
@@ -45,6 +35,8 @@ export function ProTools({ debugInfo }: ProToolsProps) {
     const success = searchParams.get("success");
     const canceled = searchParams.get("canceled");
     const sessionId = searchParams.get("session_id");
+    const donationSuccess = searchParams.get("donation_success");
+    const donationCanceled = searchParams.get("donation_canceled");
 
     if (success === "true" && sessionId) {
       // Payment successful!
@@ -53,16 +45,24 @@ export function ProTools({ debugInfo }: ProToolsProps) {
         description: "Pro Tools are now unlocked! Enjoy your professional features.",
         duration: 5000,
       });
-
-      // Clean URL
       window.history.replaceState({}, "", "/pro-tools");
     } else if (canceled === "true") {
       toast.error("Payment Canceled", {
         description: "You can try again whenever you're ready.",
         duration: 4000,
       });
-
-      // Clean URL
+      window.history.replaceState({}, "", "/pro-tools");
+    } else if (donationSuccess === "true") {
+      toast.success("☕ Thank you for the coffee!", {
+        description: "Your support means the world to us.",
+        duration: 5000,
+      });
+      window.history.replaceState({}, "", "/pro-tools");
+    } else if (donationCanceled === "true") {
+      toast.info("Donation Canceled", {
+        description: "Maybe next time! Thanks for considering it.",
+        duration: 4000,
+      });
       window.history.replaceState({}, "", "/pro-tools");
     }
   }, [searchParams, unlockPro]);
@@ -98,17 +98,40 @@ export function ProTools({ debugInfo }: ProToolsProps) {
     },
   ];
 
+  // Track 'x' key press for reset button
+  const [showReset, setShowReset] = useState(false);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key.toLowerCase() === "x") setShowReset(true);
+    };
+    const handleKeyUp = (e: KeyboardEvent) => {
+      if (e.key.toLowerCase() === "x") setShowReset(false);
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+    };
+  }, []);
+
   if (isProUnlocked) {
     return (
       <div className="max-w-6xl mx-auto relative">
-        {/* Hidden reset button for testing - double click to reset */}
-        <button
-          onDoubleClick={handleReset}
-          className="absolute -top-4 right-0 text-xs text-gray-600 hover:text-red-400 opacity-20 hover:opacity-100 transition-all font-mono"
-          title="Double-click to reset PRO status (for testing)"
-        >
-          [RESET_PRO]
-        </button>
+        {/* Hidden reset button for testing - hold 'x' and double click to reset */}
+        {showReset && (
+          <button
+            onDoubleClick={handleReset}
+            id="reset-pro-button"
+            className="absolute -top-4 right-0 text-xs text-gray-600 hover:text-red-400 opacity-50 hover:opacity-100 transition-all font-mono animate-in fade-in duration-200"
+            title="Double-click to reset PRO status (for testing)"
+          >
+            [RESET_PRO]
+          </button>
+        )}
 
         <Tabs defaultValue="reaction-time" className="w-full">
           <TabsList className="w-full justify-start mb-8 bg-[#12121a] border border-cyan-500/20 p-1 flex-wrap h-auto">
@@ -273,29 +296,6 @@ export function ProTools({ debugInfo }: ProToolsProps) {
           </a>
         </p>
       </Card>
-
-      {/* Debug Info */}
-      {debugInfo && (
-        <div className="mt-8 p-4 bg-black/50 border border-red-500/30 rounded text-left font-mono text-xs text-gray-500 overflow-x-auto">
-          <p className="text-red-400 font-bold mb-2">⚠️ DEBUG INFO (First 8 chars)</p>
-          <div className="grid grid-cols-[200px_1fr] gap-2">
-            <div>STRIPE_WEBHOOK_SECRET:</div>
-            <div className="text-gray-300">{debugInfo.webhookSecret}</div>
-
-            <div>STRIPE_PRICE_ID:</div>
-            <div className="text-gray-300">{debugInfo.priceId}</div>
-
-            <div>STRIPE_SECRET_KEY:</div>
-            <div className="text-gray-300">{debugInfo.secretKey}</div>
-
-            <div>STRIPE_PRODUCT_ID:</div>
-            <div className="text-gray-300">{debugInfo.productId}</div>
-
-            <div>NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:</div>
-            <div className="text-gray-300">{debugInfo.publishableKey}</div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
