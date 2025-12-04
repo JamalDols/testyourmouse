@@ -4,6 +4,7 @@ import { stripeConfig } from "@/lib/stripe-config";
 import { resend, emailConfig } from "@/lib/resend";
 import { PaymentConfirmationEmail, getPaymentConfirmationText } from "@/emails/PaymentConfirmationEmail";
 import Stripe from "stripe";
+import jwt from "jsonwebtoken";
 
 export async function POST(req: NextRequest) {
   const body = await req.text();
@@ -58,6 +59,20 @@ export async function POST(req: NextRequest) {
             console.log("✓ Resend API Key is configured");
 
             try {
+              // Generate recovery token
+              const token = jwt.sign(
+                {
+                  email: session.customer_email,
+                  sessionId: session.id,
+                  type: "purchase_recovery",
+                },
+                process.env.JWT_SECRET || "default_secret",
+                { expiresIn: "365d" } // Token valid for 1 year
+              );
+
+              const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+              const recoveryUrl = `${baseUrl}/recover?token=${token}`;
+
               const result = await resend.emails.send({
                 from: emailConfig.from,
                 replyTo: emailConfig.replyTo,
@@ -68,12 +83,14 @@ export async function POST(req: NextRequest) {
                   amount: session.amount_total,
                   currency: session.currency || "usd",
                   sessionId: session.id,
+                  recoveryUrl,
                 }),
                 text: getPaymentConfirmationText({
                   customerEmail: session.customer_email,
                   amount: session.amount_total,
                   currency: session.currency || "usd",
                   sessionId: session.id,
+                  recoveryUrl,
                 }),
               });
 

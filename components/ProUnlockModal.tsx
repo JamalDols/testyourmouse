@@ -6,9 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Lock, Mail, CreditCard, AlertCircle, Loader2 } from "lucide-react";
+import { Lock, Mail, CreditCard, AlertCircle, Loader2, RefreshCw } from "lucide-react";
 import { trackProPaymentIntent } from "@/lib/analytics";
 import { usePrice } from "@/hooks/usePrice";
+import { toast } from "sonner";
 
 interface ProUnlockModalProps {
   open: boolean;
@@ -19,6 +20,7 @@ export function ProUnlockModal({ open, onOpenChange }: ProUnlockModalProps) {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [isRecovering, setIsRecovering] = useState(false);
   const { price, mounted } = usePrice();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -34,31 +36,57 @@ export function ProUnlockModal({ open, onOpenChange }: ProUnlockModalProps) {
     setIsLoading(true);
 
     try {
-      // Track payment intent
-      trackProPaymentIntent();
+      if (isRecovering) {
+        // Handle Recovery
+        const response = await fetch("/api/send-recovery", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        });
 
-      // Create Stripe Checkout Session
-      const response = await fetch("/api/checkout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
+        const data = await response.json();
 
-      const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.error || "Failed to send recovery email");
+        }
 
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to create checkout session");
+        toast.success("Recovery Email Sent", {
+          description: "Check your inbox for a link to restore your purchase.",
+        });
+        onOpenChange(false);
+      } else {
+        // Handle Purchase
+        trackProPaymentIntent();
+
+        // Create Stripe Checkout Session
+        const response = await fetch("/api/checkout", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || "Failed to create checkout session");
+        }
+
+        // Redirect to Stripe Checkout
+        window.location.href = data.url;
       }
-
-      // Redirect to Stripe Checkout
-      window.location.href = data.url;
     } catch (err: any) {
-      console.error("Checkout error:", err);
+      console.error("Error:", err);
       setError(err.message || "Something went wrong. Please try again.");
+    } finally {
       setIsLoading(false);
     }
+  };
+
+  const toggleMode = () => {
+    setIsRecovering(!isRecovering);
+    setError("");
   };
 
   return (
@@ -67,12 +95,18 @@ export function ProUnlockModal({ open, onOpenChange }: ProUnlockModalProps) {
         <DialogHeader>
           <div className="flex items-center justify-center mb-4">
             <div className="p-3 bg-purple-500/20 rounded-lg border border-purple-500/50">
-              <Lock className="w-8 h-8 text-purple-400" />
+              {isRecovering ? <RefreshCw className="w-8 h-8 text-purple-400" /> : <Lock className="w-8 h-8 text-purple-400" />}
             </div>
           </div>
-          <DialogTitle className="text-2xl text-center text-purple-400">Unlock Pro Tools</DialogTitle>
+          <DialogTitle className="text-2xl text-center text-purple-400">{isRecovering ? "Recover Purchase" : "Unlock Pro Tools"}</DialogTitle>
           <DialogDescription className="text-center text-gray-300">
-            Get lifetime access to all professional tools for a one-time payment of <span className="text-purple-400 font-bold">{mounted ? price.formatted : "$4.99"}</span>
+            {isRecovering ? (
+              "Enter the email you used for your purchase to receive a recovery link."
+            ) : (
+              <span>
+                Get lifetime access to all professional tools for a one-time payment of <span className="text-purple-400 font-bold">{mounted ? price.formatted : "$4.99"}</span>
+              </span>
+            )}
           </DialogDescription>
         </DialogHeader>
 
@@ -93,7 +127,7 @@ export function ProUnlockModal({ open, onOpenChange }: ProUnlockModalProps) {
               className="bg-[#12121a] border-cyan-500/30 focus:border-cyan-500 text-white"
               required
             />
-            <p className="text-xs text-gray-400">We'll send your receipt to this email</p>
+            <p className="text-xs text-gray-400">{isRecovering ? "We'll check our records for this email" : "We'll send your receipt to this email"}</p>
           </div>
 
           {/* Error Alert */}
@@ -104,17 +138,19 @@ export function ProUnlockModal({ open, onOpenChange }: ProUnlockModalProps) {
             </Alert>
           )}
 
-          {/* Features List */}
-          <div className="bg-cyan-500/5 border border-cyan-500/20 rounded-lg p-4 space-y-2">
-            <p className="text-sm font-semibold text-cyan-400 mb-2">What's included:</p>
-            <ul className="text-sm text-gray-300 space-y-1">
-              <li>✅ Reaction Time Test</li>
-              <li>✅ Pixel Perfect Test</li>
-              <li>✅ Advanced Sensor Analysis</li>
-              <li>✅ Response Time Graph</li>
-              <li>✅ Lifetime access (no subscription)</li>
-            </ul>
-          </div>
+          {/* Features List - Only show in purchase mode */}
+          {!isRecovering && (
+            <div className="bg-cyan-500/5 border border-cyan-500/20 rounded-lg p-4 space-y-2">
+              <p className="text-sm font-semibold text-cyan-400 mb-2">What's included:</p>
+              <ul className="text-sm text-gray-300 space-y-1">
+                <li>✅ Reaction Time Test</li>
+                <li>✅ Pixel Perfect Test</li>
+                <li>✅ Advanced Sensor Analysis</li>
+                <li>✅ Response Time Graph</li>
+                <li>✅ Lifetime access (no subscription)</li>
+              </ul>
+            </div>
+          )}
 
           {/* Buttons */}
           <div className="flex gap-3 pt-2">
@@ -129,17 +165,26 @@ export function ProUnlockModal({ open, onOpenChange }: ProUnlockModalProps) {
                 </>
               ) : (
                 <>
-                  <CreditCard className="w-4 h-4 mr-2" />
-                  Continue to Payment
+                  {isRecovering ? <RefreshCw className="w-4 h-4 mr-2" /> : <CreditCard className="w-4 h-4 mr-2" />}
+                  {isRecovering ? "Send Link" : "Continue to Payment"}
                 </>
               )}
             </Button>
           </div>
 
+          {/* Toggle Mode Link */}
+          <div className="text-center pt-2">
+            <button type="button" onClick={toggleMode} className="text-xs text-gray-400 hover:text-cyan-400 underline transition-colors">
+              {isRecovering ? "Back to Purchase" : "Already purchased? Recover here"}
+            </button>
+          </div>
+
           {/* Security Note */}
-          <p className="text-xs text-gray-400 text-center">
-            🔒 Secure payment powered by <span className="text-purple-400">Stripe</span>
-          </p>
+          {!isRecovering && (
+            <p className="text-xs text-gray-400 text-center">
+              🔒 Secure payment powered by <span className="text-purple-400">Stripe</span>
+            </p>
+          )}
         </form>
       </DialogContent>
     </Dialog>

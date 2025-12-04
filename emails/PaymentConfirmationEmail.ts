@@ -3,9 +3,10 @@ interface PaymentConfirmationEmailProps {
   amount: number;
   currency: string;
   sessionId: string;
+  recoveryUrl: string;
 }
 
-export function PaymentConfirmationEmail({ customerEmail, amount, currency, sessionId }: PaymentConfirmationEmailProps) {
+export function PaymentConfirmationEmail({ customerEmail, amount, currency, sessionId, recoveryUrl }: PaymentConfirmationEmailProps) {
   const formattedAmount = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: currency.toUpperCase(),
@@ -98,15 +99,15 @@ export function PaymentConfirmationEmail({ customerEmail, amount, currency, sess
               <table width="100%" cellpadding="0" cellspacing="0" style="margin: 30px 0;">
                 <tr>
                   <td align="center">
-                    <a href="https://testyourmouse.com/pro-tools" style="display: inline-block; padding: 16px 40px; background: linear-gradient(135deg, #22d3ee 0%, #a855f7 100%); color: #ffffff; text-decoration: none; border-radius: 8px; font-size: 16px; font-weight: 600; text-align: center;">
-                      Access Pro Tools →
+                    <a href="${recoveryUrl}" style="display: inline-block; padding: 16px 40px; background: linear-gradient(135deg, #22d3ee 0%, #a855f7 100%); color: #ffffff; text-decoration: none; border-radius: 8px; font-size: 16px; font-weight: 600; text-align: center;">
+                      Activate Pro Tools →
                     </a>
                   </td>
                 </tr>
               </table>
 
               <p style="margin: 20px 0 0; font-size: 14px; line-height: 1.6; color: #a0a0b0; text-align: center;">
-                Your Pro Tools are now unlocked. Visit the link above to start testing!
+                Click the button above to activate your Pro Tools on this device. You can save this email to restore your purchase on other devices.
               </p>
             </td>
           </tr>
@@ -132,7 +133,7 @@ export function PaymentConfirmationEmail({ customerEmail, amount, currency, sess
   `;
 }
 
-export function getPaymentConfirmationText({ customerEmail, amount, currency, sessionId }: PaymentConfirmationEmailProps) {
+export function getPaymentConfirmationText({ customerEmail, amount, currency, sessionId, recoveryUrl }: PaymentConfirmationEmailProps) {
   const formattedAmount = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: currency.toUpperCase(),
@@ -158,7 +159,7 @@ What's Included:
 ✓ Real-time Response Graph
 ✓ Lifetime Access (No Subscription)
 
-Access your Pro Tools: https://testyourmouse.com/pro-tools
+Activate your Pro Tools: ${recoveryUrl}
 
 Need help? Contact us at support@testyourmouse.com
 
