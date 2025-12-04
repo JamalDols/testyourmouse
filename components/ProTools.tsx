@@ -15,7 +15,17 @@ import { ProUnlockModal } from "./ProUnlockModal";
 import { toast } from "sonner";
 import { usePrice } from "@/hooks/usePrice";
 
-export function ProTools() {
+interface ProToolsProps {
+  debugInfo?: {
+    webhookSecret: string;
+    priceId: string;
+    secretKey: string;
+    productId: string;
+    publishableKey: string;
+  };
+}
+
+export function ProTools({ debugInfo }: ProToolsProps) {
   const { isProUnlocked, unlockPro } = useProContext();
   const [showModal, setShowModal] = useState(false);
   const searchParams = useSearchParams();
@@ -263,6 +273,29 @@ export function ProTools() {
           </a>
         </p>
       </Card>
+
+      {/* Debug Info */}
+      {debugInfo && (
+        <div className="mt-8 p-4 bg-black/50 border border-red-500/30 rounded text-left font-mono text-xs text-gray-500 overflow-x-auto">
+          <p className="text-red-400 font-bold mb-2">⚠️ DEBUG INFO (First 8 chars)</p>
+          <div className="grid grid-cols-[200px_1fr] gap-2">
+            <div>STRIPE_WEBHOOK_SECRET:</div>
+            <div className="text-gray-300">{debugInfo.webhookSecret}</div>
+
+            <div>STRIPE_PRICE_ID:</div>
+            <div className="text-gray-300">{debugInfo.priceId}</div>
+
+            <div>STRIPE_SECRET_KEY:</div>
+            <div className="text-gray-300">{debugInfo.secretKey}</div>
+
+            <div>STRIPE_PRODUCT_ID:</div>
+            <div className="text-gray-300">{debugInfo.productId}</div>
+
+            <div>NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:</div>
+            <div className="text-gray-300">{debugInfo.publishableKey}</div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
