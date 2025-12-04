@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 };
 
 export default function ProToolsPage() {
-  const mask = (val: string | undefined) => (val ? `${val.substring(0, 8)}...` : "NOT_SET");
+  const mask = (val: string | undefined) => (val ? `${val.substring(0, 16)}...` : "NOT_SET");
 
   const debugInfo = {
     webhookSecret: mask(process.env.STRIPE_WEBHOOK_SECRET),
