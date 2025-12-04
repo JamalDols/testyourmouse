@@ -1,14 +1,14 @@
 import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
+  const isProduction = process.env.VERCEL_ENV === "production";
+
   return {
-    rules: [
-      {
-        userAgent: "*",
-        allow: "/",
-        disallow: ["/api/", "/private/"],
-      },
-    ],
+    rules: {
+      userAgent: "*",
+      allow: isProduction ? "/" : undefined,
+      disallow: isProduction ? "/private/" : "/",
+    },
     sitemap: "https://testyourmouse.com/sitemap.xml",
   };
 }
