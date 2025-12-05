@@ -154,6 +154,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <footer className="border-t border-cyan-500/20 mt-16 py-8" role="contentinfo">
               <div className="max-w-7xl mx-auto px-4 text-center text-sm text-cyan-400/50">
                 <p>© 2025 TestYourMouse.com • Made with ❤️ for gamers and tech enthusiasts</p>
+                <p className="mt-2">
+                  <Link href="/privacy-policy" className="hover:text-cyan-400 transition-colors">
+                    Privacy Policy
+                  </Link>
+                </p>
               </div>
             </footer>
 
