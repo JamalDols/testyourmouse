@@ -108,7 +108,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <div className="max-w-7xl mx-auto px-4 py-6">
                 <Link href="/" className="flex items-center gap-3 mb-2 hover:opacity-80 transition-opacity w-fit">
                   <Mouse className="w-8 h-8 text-cyan-400" aria-hidden="true" />
-                  <h1 className="text-3xl font-medium tracking-wider text-cyan-400">TestYourMouse</h1>
+                  <span className="text-3xl font-medium tracking-wider text-cyan-400">TestYourMouse</span>
                 </Link>
                 <p className="text-cyan-400/70 text-sm">Test your mouse like a pro</p>
               </div>
