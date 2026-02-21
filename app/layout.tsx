@@ -91,6 +91,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://testyourmouse.com",
   },
+  other: {
+    "google-adsense-account": "ca-pub-7341280665681657",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
