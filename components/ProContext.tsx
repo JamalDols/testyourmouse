@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext } from "react";
 
 interface ProContextType {
   isProUnlocked: boolean;
@@ -10,22 +10,10 @@ interface ProContextType {
 const ProContext = createContext<ProContextType | undefined>(undefined);
 
 export function ProProvider({ children }: { children: React.ReactNode }) {
-  const [isProUnlocked, setIsProUnlocked] = useState(false);
+  // All features are free — always unlocked
+  const unlockPro = () => {};
 
-  // Check localStorage on mount
-  useEffect(() => {
-    const proStatus = localStorage.getItem("testyourmouse_pro_unlocked");
-    if (proStatus === "true") {
-      setIsProUnlocked(true);
-    }
-  }, []);
-
-  const unlockPro = () => {
-    setIsProUnlocked(true);
-    localStorage.setItem("testyourmouse_pro_unlocked", "true");
-  };
-
-  return <ProContext.Provider value={{ isProUnlocked, unlockPro }}>{children}</ProContext.Provider>;
+  return <ProContext.Provider value={{ isProUnlocked: true, unlockPro }}>{children}</ProContext.Provider>;
 }
 
 export function useProContext() {
